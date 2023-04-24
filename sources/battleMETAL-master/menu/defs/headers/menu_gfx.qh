@@ -1,0 +1,20 @@
+/*
+  battleMETAL
+  author: Peter Roohr
+  date: 04/11/2018
+  
+  overview: color definitions and picture strings
+*/
+
+/*
+  GRAPHICS CONSTANTS
+*/
+#define UI_IMG_MOUSE "gfx/ui/ui_cursor.png"
+#define IMG_BTN_BACK "gfx/menu/btn_back.png"
+#define IMG_BTN_ACPT "gfx/menu/btn_accept.png"
+#define UI_IMG_ARW_LFT "gfx/hud/trg_pip_lft.png"
+#define UI_IMG_ARW_RGT "gfx/hud/trg_pip_rgt.png"
+
+#define IMG_TEAM_SURVEST "gfx/ui/ui_icon_survest.png"
+#define IMG_TEAM_MILITAR "gfx/ui/ui_icon_militar.png"
+#define IMG_TEAM_PSC "gfx/ui/ui_icon_psc.png"

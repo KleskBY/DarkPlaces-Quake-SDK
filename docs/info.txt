@@ -1,0 +1,279 @@
+
+//SOME INFO
+Obj import - make sure usemtl line in .obj file links to texute file (usemtl textures/stalker/roof/roof_metal_01.tga) or (usemtl metal10)
+Inches to meters = 0.0254
+20 20 72 //Half-life payer size '-10 -10 -36', '10 10 36'; //72 units tall
+32 32 56 //quake '-16 -16 -24' '16 16 32' //56
+ 
+
+//RENDER
+r_editlights - realtime light editor, good for showing coordinates
+r_textshadow is "0" ["0"] draws a shadow on all text to improve readability (note: value controls offset, 1 = 1 pixel, 1.5 = 1.5 pixels, etc)
+r_fxaa is "0" ["0"] fast approximate anti aliasing
+r_ambient - scene ambient light level
+r_showbboxes is "0" ["0"] shows bounding boxes of server entities, value controls opacity scaling (1 = 10%,  10 = 100%)
+mod_generatelightmaps - generate lightmaps for static lightnings
+v_color_black_b is "0" ["0"] desired color of black
+v_color_black_g is "0" ["0"] desired color of black
+v_color_black_r is "0" ["0"] desired color of black
+v_color_enable is "0" ["0"] enables black-grey-white color correction curve controls
+r_viewscale is "1" ["1"] //Can be used for blur or taking HIGH res images. scaling factor for resolution of the fbo rendering method, must be > 0, can be above 1 for a costly antialiasing behavior, typical values are 0.5 for 1/4th as many pixels rendered, or 1 for normal rendering
+r_viewscale_fpsscaling is "0" ["0"] change resolution based on framerate
+r_viewscale_fpsscaling_min is "0.0625" ["0.0625"] worst acceptable quality
+r_viewscale_fpsscaling_multiply is "5" ["5"] adjust quality up or down by the frametime difference from 1.0/target, multiplied by this factor
+r_viewscale_fpsscaling_stepmax is "1.00" ["1.00"] largest adjustment to hit the target framerate (this value prevents wild overshooting of the estimate)
+r_viewscale_fpsscaling_stepsize is "0.01" ["0.01"] smallest adjustment to hit the target framerate (this value prevents minute oscillations)
+r_viewscale_fpsscaling_target is "70" ["70"] desired framerate
+r_glsl_saturation 0 - black and white or other color mods
+
+//Usefull
+vid_desktopfullscreen - Use desktop resolution
+cl_beams_quakepositionhack 0 - Allows to draw ligntning beam from any position to any direction. 
+sv_gameplayfix_q1bsptracelinereportstexture is "0" ["0"] enables mods to get accurate trace_texture results on q1bsp by using a surface-hitting traceline implementation rather than the standard solidbsp method, q3bsp always reports texture accurately
+sv_saveentfile : save map entities to .ent file (to allow external editing)
+cvarlist - list all console variables
+cmdlist - list all console commands
+log_file cvar to log console messages to a file.
+scr_loadingscreen_background is "0" ["0"] show the last visible background during loading screen (costs one screenful of video memory)
+v_centerspeed is "500" ["500"] how fast the view centers itself
+v_kickpitch is "0.6" ["0.6"] how much a view kick from damage pitches your view
+v_kickroll is "0.6" ["0.6"] how much a view kick from damage rolls your view
+v_kicktime is "0.5" ["0.5"] how long a view kick from damage lasts
+showspeed is "0" ["0"] shows your current speed (qu per second); number selects unit: 1 = qu/s, 2 = m/s, 3 = km/h, 4 = mph, 5 = knots
+showfps is "0" ["0"] shows your rendered fps (frames per second)
+cl_maxfps is "250" ["0"] maximum fps cap, 0 = unlimited, if game is running faster than this it will wait before running another frame (useful to make cpu time available to other programs)
+mod_q1bsp_polygoncollisions is "0" ["0"] disables use of precomputed cliphulls and instead collides with polygons (uses Bounding Interval Hierarchy optimizations)
+r_fullbright_directed 1; //Fakelight
+
+//Client
+cl_deathfade is "0.1" ["0"] fade screen to dark red when dead, value represents how fast the fade is (higher is faster)
+cl_bobfall is "0.01" ["0"] how much the view swings down when falling (influenced by the speed you hit the ground with)
+.float ping; //continuously updated field indicating client's ping (based on average of last 16 packet time differences).
+.float ping_packetloss;
+.float ping_movementloss;
+.string clientstatus; //Frags?
+void(entity ent, float colors) setcolor = #401;
+.float viewzoom; //scales fov and sensitivity of player, valid range is 0 to 1 (intended for sniper rifle zooming, and such)
+.vector movement; //.movement vector contains the movement input from the player, allowing QC to do as it wishs with the input, and SV_PlayerPhysics will completely replace the player physics if present (works for all MOVETYPE's), see darkplaces mod source for example of this function (in playermovement.qc, adds HalfLife ladders support, as well as acceleration/deceleration while airborn (rather than the quake sudden-stop while airborn), and simplifies the physics a bit)
+.entity clientcamera; // override camera entity
+.float disableclientprediction;
+.entity drawonlytoclient; //the entity is only visible to the specified client.
+void(entity clent) dropclient = #453; //kick out of the game
+.string netaddress; // provides the netaddress of the associated entity (ie. 127.0.0.1) and "null/botclient" if the netconnection of the entity is invalid
+.entity nodrawtoclient; //the entity is not visible to the specified client.
+
+//GAMEPLAY FIX
+sv_gameplayfix_blowupfallenzombies is "0" ["0"] causes findradius to detect SOLID_NOT entities such as zombies and corpses on the floor, allowing splash damage to apply to them
+sv_gameplayfix_consistentplayerprethink is "0" ["0"] //DANGEROUS, improves fairness in multiplayer by running all PlayerPreThink functions (which fire weapons) before performing physics, then running all PlayerPostThink functions
+sv_gameplayfix_delayprojectiles is "0" ["0"] //DANGEROUS, causes entities to not move on the same frame they are spawned, meaning that projectiles wait until the next frame to perform their first move, giving proper interpolation and rocket trails, but making weapons harder to use at low framerates
+sv_gameplayfix_downtracesupportsongroundflag is "0" ["0"] prevents very short moves from clearing onground (which may make the player stick to the floor at high netfps)
+sv_gameplayfix_droptofloorstartsolid is "0" ["0"] prevents items and monsters that start in a solid area from falling out of the level (makes droptofloor treat trace_startsolid as an acceptable outcome)
+sv_gameplayfix_droptofloorstartsolid_nudgetocorrect is "0" ["0"] tries to nudge stuck items and monsters out of walls before droptofloor is performed
+sv_gameplayfix_easierwaterjump is "0" ["0"] changes water jumping to make it easier to get out of water (exactly like in QuakeWorld)
+sv_gameplayfix_findradiusdistancetobox is "0" ["0"] causes findradius to check the distance to the corner of a box rather than the center of the box, makes findradius detect bmodels such as very large doors that would otherwise be unaffected by splash damage
+sv_gameplayfix_fixedcheckwatertransition is "0" ["0"] fix two very stupid bugs in SV_CheckWaterTransition when watertype is CONTENTS_EMPTY (the bugs causes waterlevel to be 1 on first frame, -1 on second frame - the fix makes it 0 on both frames)
+sv_gameplayfix_gravityunaffectedbyticrate is "0" ["0"] fix some ticrate issues in physics.
+sv_gameplayfix_grenadebouncedownslopes is "0" ["0"] prevents MOVETYPE_BOUNCE (grenades) from getting stuck when fired down a downward sloping surface
+sv_gameplayfix_multiplethinksperframe is "0" ["0"] allows entities to think more often than the server framerate, primarily useful for very high fire rate weapons
+sv_gameplayfix_noairborncorpse is "0" ["0"] causes entities (corpses, items, etc) sitting ontop of moving entities (players) to fall when the moving entity (player) is no longer supporting them
+sv_gameplayfix_noairborncorpse_allowsuspendeditems is "0" ["0"] causes entities sitting ontop of objects that are instantaneously remove to float in midair (special hack to allow a common level design trick for floating items)
+sv_gameplayfix_nogravityonground is "0" ["0"] turn off gravity when on ground (to get rid of sliding)
+sv_gameplayfix_nostepmoveonsteepslopes is "0" ["0"] crude fix which prevents MOVETYPE_STEP (not swimming or flying) to move on slopes whose angle is bigger than 45 degree
+sv_gameplayfix_nudgeoutofsolid is "0" ["0"] attempts to fix physics errors (where an object ended up in solid for some reason)
+sv_gameplayfix_nudgeoutofsolid_separation is "0.03125" ["0.03125"] keep objects this distance apart to prevent collision issues on seams
+sv_gameplayfix_q1bsptracelinereportstexture is "0" ["0"] enables mods to get accurate trace_texture results on q1bsp by using a surface-hitting traceline implementation rather than the standard solidbsp method, q3bsp always reports texture accurately
+sv_gameplayfix_q2airaccelerate is "0" ["0"] Quake2-style air acceleration
+sv_gameplayfix_setmodelrealbox is "0" ["0"] fixes a bug in Quake that made setmodel always set the entity box to ('-16 -16 -16', '16 16 16') rather than properly checking the model box, breaks some poorly coded mods
+sv_gameplayfix_slidemoveprojectiles is "0" ["0"] allows MOVETYPE_FLY/FLYMISSILE/TOSS/BOUNCE/BOUNCEMISSILE entities to finish their move in a frame even if they hit something, fixes 'gravity accumulation' bug for grenades on steep slopes
+sv_gameplayfix_stepdown is "0" ["0"] attempts to step down stairs, not just up them (prevents the familiar thud..thud..thud.. when running down stairs and slopes)
+sv_gameplayfix_stepmultipletimes is "0" ["0"] //nice effect but breaks jump height and ladder a bit. applies step-up onto a ledge more than once in a single frame, when running quickly up stairs
+sv_gameplayfix_swiminbmodels is "0" ["0"] causes pointcontents (used to determine if you are in a liquid) to check bmodel entities as well as the world model, so you can swim around in (possibly moving) water bmodel entities
+sv_gameplayfix_unstickentities is "1" ["1"] hack to check if entities are crossing world collision hull and try to move them to the right position
+sv_gameplayfix_unstickplayers is "1" ["1"] big hack to try and fix the rare case of MOVETYPE_WALK entities getting stuck in the world clipping hull.
+sv_gameplayfix_upwardvelocityclearsongroundflag is "0" ["0"] prevents monsters, items, and most other objects from being stuck to the floor when pushed around by damage, and other situations in mods
+sv_onlycsqcnetworking is "0" ["0"] disables legacy entity networking code for higher performance (except on clients, which can still be legacy)
+
+
+//MAP DEBUGGING
+r_lockpvs is "0" ["0"] disables pvs switching, allows you to walk around and inspect what is visible from a given location in the map (anything not visible from your current location will not be drawn)
+r_showbboxes is "0" ["0"] shows bounding boxes of server entities, value controls opacity scaling (1 = 10%,  10 = 100%)
+r_showsurfaces is "0" ["0"] 1 shows surfaces as different colors, or a value of 2 shows triangle draw order (for analyzing whether meshes are optimized for vertex cache)
+showtex is "0" ["0"] shows the name of the texture on the crosshair (for map debugging)
+r_showoverdraw is "0" ["0"] shows overlapping geometry
+r_drawportals is "0" ["0"] shows portals (separating polygons) in world interior in quake1 maps
+r_listmaptextures : list all textures used by the current map
+r_replacemaptexture : override a map texture for testing purposes
+r_showtris is "0" ["0"] shows triangle outlines, value controls brightness (can be above 1)
+developer_texturelogging is "0" ["0"] produces a textures.log file containing names of skins and map textures the engine tried to load
+
+//MODELS / OBJ
+mod_generatelightmaps : rebuilds lighting on current worldmodel
+modeldecompile : exports a model in several formats for editing purposes
+modellist : prints a list of loaded models
+modelprecache : load a model
+mod_obj_orientation is "1" ["1"] fix orientation of OBJ models to the usual conventions (if zero, use coordinates as is)
+mod_generatelightmaps_borderpixels is "2" ["2"] extra space around polygons to prevent sampling artifacts
+mod_generatelightmaps_gridradius is "64" ["64"] sampling area around each lightgrid cell center
+mod_generatelightmaps_gridsamples is "64" ["64"] number of shadow tests done per lightgrid cell
+mod_generatelightmaps_lightmapradius is "16" ["16"] sampling area around each lightmap pixel
+mod_generatelightmaps_lightmapsamples is "16" ["16"] number of shadow tests done per lightmap pixel
+mod_generatelightmaps_texturesize is "1024" ["1024"] size of lightmap textures
+mod_generatelightmaps_unitspersample is "8" ["8"] lightmap resolution
+mod_generatelightmaps_vertexradius is "16" ["16"] sampling area around each vertex
+mod_generatelightmaps_vertexsamples is "16" ["16"] number of shadow tests done per vertex
+
+//FUN
+v_idlescale 100 // drunk effect
+v_psycho		// lsd effect
+r_trippy		// drugs effect
+
+//SOUND
+void(vector origin, string sample, float volume, float attenuation) pointsound = #483;
+float SoundRadius(float radius)
+{
+    return ((cvar("snd_soundradius") / 1.5) / radius);
+}
+sound(self, CHAN_WEAPON, "beep.wav", 1, SoundRadius(2000)); //2000 inches == 50 meters
+
+snd_soundradius is "1200" ["1200"] radius of weapon sounds and other standard sound effects (monster idle noises are half this radius and flickering light noises are one third of this radius)
+snd_attenuation_decibel is "0" ["0"] Decibel sound attenuation per sound radius distance
+snd_attenuation_exponent is "1" ["1"] Exponent of (1-radius) in sound attenuation formula
+snd_channel0volume is "1" ["1"] volume multiplier of the auto-allocate entity channel
+snd_channel1volume is "1" ["1"] volume multiplier of the 1st entity channel
+snd_channel2volume is "1" ["1"] volume multiplier of the 2nd entity channel
+snd_channel3volume is "1" ["1"] volume multiplier of the 3rd entity channel
+snd_channel4volume is "1" ["1"] volume multiplier of the 4th entity channel
+snd_channel5volume is "1" ["1"] volume multiplier of the 5th entity channel
+snd_channel6volume is "1" ["1"] volume multiplier of the 6th entity channel
+snd_channel7volume is "1" ["1"] volume multiplier of the 7th entity channel
+float ATTN_NONE = 0; 	//Everywhere
+float ATTN_NORM = 1; 	//800 units sound radius
+float ATTN_IDLE = 2; 	//400 units sound radius
+float ATTN_STATIC = 3; 	// 200 units sound radius
+
+void(entity e, float chan, string samp, float vol, float atten, float speed, float flags) sound7 = #8;
+float SOUNDFLAG_RELIABLE = 1;
+float(entity e, float channel) getsoundtime = #533; // get currently sound playing position on entity channel, -1 if not playing or error
+float(string sample) soundlength = #534; // returns length of sound sample in seconds, -1 on error (sound not precached, sound system not initialized etc.)
+
+
+//APEREANCE
+con_notify is "4" ["4"] how many notify lines to show
+con_notifyalign is "" [""] how to align notify lines: 0 = left, 0.5 = center, 1 = right, empty string = game default)
+con_notifysize is "8" ["8"] notify text size in virtual 2D pixels
+con_notifytime is "3" ["3"] how long notify lines last, in seconds
+con_textsize is "8" ["8"] console text size in virtual 2D pixels
+scr_centertime is "2" ["2"] how long centerprint messages show
+r_textshadow is "2" ["0"] Text shadow to make it more visible.
+
+
+//DPDEFS
+.float buttonchat; //true if the player is currently chatting (in messagemode, menus or console)
+.float buttonuse; //made +use and -use commands work, they now control the .buttonuse field (.button1 was used by many mods for other purposes).
+.float alpha; //transparency of entity
+.vector colormod; //colormod
+
+//GLOW / TRAIL
+//customizable glowing light effect on the entity, glow_color is a paletted (8bit) color in the range 0-255 (note: 0 and 254 are white), glow_size is 0 or higher (up to the engine what limit to cap it to, darkplaces imposes a 1020 limit), if glow_trail is true it will leave a trail of particles of the same color as the light.
+.float glow_color;
+.float glow_size;
+.float glow_trail;
+.vector glowmod; //controls color of the entity's glow texture (fullbrights), '0 0 0', is forced to be '1 1 1' (otherwise everything would be black), used for tinting objects, see colormod (same color restrictions apply).
+
+//OTHER
+.float scale; //controls rendering scale of the object, 0 is forced to be 1, darkplaces uses 1/16th accuracy and a limit of 15.9375, can be used to make an object larger or smaller.
+.float bouncefactor; // velocity multiplier after a bounce
+.float bouncestop; // bounce stops if velocity to bounce plane is < bouncestop * gravity AFTER the bounce
+.entity drawonlytoclient;
+
+//CLIENT
+.float() customizeentityforclient; // self = this entity, other = client entity
+//description:
+//allows qc to modify an entity before it is sent to each client, the function returns TRUE if it should send, FALSE if it should not, and is fully capable of editing the entity's fields, this allows cloaked players to appear less transparent to their teammates, navigation markers to only show to their team, etc
+//tips on writing customize functions:
+//it is a good idea to return FALSE early in the function if possible to reduce cpu usage, because this function may be called many thousands of times per frame if there are many customized entities on a 64+ player server.
+//you are free to change anything in self, but please do not change any other entities (the results may be very inconsistent).
+//example ideas for use of this extension:
+//making icons over teammates' heads which are only visible to teammates.  for exasmple: float() playericon_customizeentityforclient = {return self.owner.team == other.team;};
+//making cloaked players more visible to their teammates than their enemies.  for example: float() player_customizeentityforclient = {if (self.items & IT_CLOAKING) {if (self.team == other.team) self.alpha = 0.6;else self.alpha = 0.1;} return TRUE;};
+//making explosion models that face the viewer (does not work well with chase_active).  for example: float() explosion_customizeentityforclient = {self.angles = vectoangles(other.origin + other.view_ofs - self.origin);self.angles_x = 0 - self.angles_x;};
+//implementation notes:
+//entity customization is done before per-client culling (visibility for instance) because the entity may be doing setorigin to display itself in different locations on different clients, may be altering its .modelindex, .effects and other fields important to culling, so customized entities increase cpu usage (non-customized entities can use all the early culling they want however, as they are not changing on a per client basis).
+
+
+//PARTICLES
+void(vector mincorner, vector maxcorner, vector vel, float howmany, float color) te_particlesnow = #410;
+te_particlerain(self.origin - '1000 1000 1000', self.origin + '1000 1000 1000', '0 0 -700', 10, 2);
+
+
+//EFFECTS
+float   EF_ADDITIVE     = 32; //additive blending when this object is rendered
+float   EF_BLUE         = 64; //entity emits blue light (used for quad)
+float 	EF_DOUBLESIDED = 32768; //render entity as double sided (backfaces are visible, I.E. you see the 'interior' of the model, rather than just the front), can be occasionally useful on transparent stuff.
+float   EF_DYNAMICMODELLIGHT     = 131072; //force dynamic model light on the entity, even if it's a BSP model (or anything else with lightmaps or light colors)
+float   EF_FLAME        = 1024; //entity is on fire
+float   EF_FULLBRIGHT   = 512; //entity is always brightly lit
+float   EF_NODEPTHTEST       = 8192; //makes entity show up to client even through walls, useful with EF_ADDITIVE for special indicators like where team bases are in a map, so that people don't get lost
+float   EF_NODRAW       = 16; //prevents server from sending entity to client (forced invisible, even if it would have been a light source or other such things)
+float   EF_NOGUNBOB     = 256; //Use on player entity - prevents gun bobbing on player.viewmodel; viewmodelforclient entity - prevents gun bobbing on an entity attached to the player's view; other entities - no effect
+float   EF_NOSHADOW     = 4096;//realtime lights will not cast shadows from this entity (but can still illuminate it)
+float   EF_RED          = 128; //entity emits red light (used for invulnerability)
+float   EF_RESTARTANIM_BIT = 1048576; //when toggled, the current animation is restarted. Useful for weapon animation. to toggle this bit in QC, you can do: self.effects += (EF_RESTARTANIM_BIT - 2 * (self.effects & EF_RESTARTANIM_BIT));
+float   EF_STARDUST     = 2048; //entity emits bouncing sparkles in every direction like flame
+float 	EF_SELECTABLE = 16384; 
+float   EF_TELEPORT_BIT = 2097152; //when toggled, interpolation of the entity is skipped for one frame. Useful for teleporting. to toggle this bit in QC, you can do:  self.effects += (EF_TELEPORT_BIT - 2 * (self.effects & EF_TELEPORT_BIT));
+float 	EF_LOWPRECISION = 4194304; //uses low quality origin coordinates, reducing network traffic compared to the default high precision, intended for numerous objects (projectiles/gibs/bullet holes/etc).
+
+
+//MODEL
+.float modelflags;
+float EF_NOMODELFLAGS = 8388608; // ignore any effects in a model file and substitute your own
+float MF_ROCKET  =   1; // leave a trail
+float MF_GRENADE =   2; // leave a trail
+float MF_GIB     =   4; // leave a trail
+float MF_ROTATE  =   8; // rotate (bonus items)
+float MF_TRACER  =  16; // green split trail
+float MF_ZOMGIB  =  32; // small blood trail
+float MF_TRACER2 =  64; // orange split trail
+float MF_TRACER3 = 128; // purple trail
+
+//MAKE CORPSE DONT STUCK IN WALLS AND BLEED WHEN YOU SHOOT THEM
+float SOLID_CORPSE = 5; //the entity will not collide with SOLID_CORPSE and SOLID_SLIDEBOX entities (and likewise they will not collide with it), this is useful if you want dead bodies that are shootable but do not obstruct movement by players and monsters, note that if you traceline with a SOLID_SLIDEBOX entity as the ignoreent, it will ignore SOLID_CORPSE entities, this is desirable for visibility and movement traces, but not for bullets, for the traceline to hit SOLID_CORPSE you must temporarily force the player (or whatever) to SOLID_BBOX and then restore to SOLID_SLIDEBOX after the traceline.
+vector(vector forward, vector up) vectoangles2 = #51; // variant of vectoangles that takes an up vector to calculate roll angle (also uses this to calculate yaw correctly if the forward is straight up or straight down) //note: just like normal vectoangles you need to negate the pitch of the returned angles if you want to feed them to makevectors or assign to self.v_angle
+float(string name, string value) registercvar = #93; //adds a new console cvar to the server console (in singleplayer this is the player's console), the cvar exists until the mod is unloaded or the game quits.
+void(string cmdname) registercommand = #352;
+
+//Transfer smth to CSQC
+void(float index, float type, ...) addstat = #232;
+float AS_STRING          = 1;
+float AS_FLOAT_TRUNCATED = 2;
+float AS_FLOAT           = 8;
+
+// LIGHTS TENEBRAE_GFX_DLIGHTS
+//fields:
+.float light_lev; // radius (does not affect brightness), typical value 350
+.vector color; // color (does not affect radius), typical value '1 1 1' (bright white), can be up to '255 255 255' (nuclear blast)
+.float style; // light style (like normal light entities, flickering torches or switchable, etc)
+.float pflags; // flags (see PFLAGS_ constants)
+.vector angles; // orientation of the light
+.float skin; // cubemap filter number, can be 1-255 (0 is assumed to be none, and tenebrae only allows 16-255), this selects a projective light filter, a value of 1 loads cubemaps/1posx.tga and cubemaps/1negx.tga and posy, negy, posz, and negz, similar to skybox but some sides need to be rotated or flipped
+float PFLAGS_NOSHADOW = 1; // light does not cast shadows
+float PFLAGS_CORONA = 2; // light has a corona flare
+float PFLAGS_FULLDYNAMIC = 128; // light enable (without this set no light is produced!)
+
+
+//FILE
+float(string s) stof = #81; // get numerical value from a string
+float(string filename, float mode) fopen = #110; // opens a file inside quake/gamedir/data/ (mode is FILE_READ, FILE_APPEND, or FILE_WRITE), returns fhandle >= 0 if successful, or fhandle < 0 if unable to open file for any reason
+void(float fhandle) fclose = #111; // closes a file
+string(float fhandle) fgets = #112; // reads a line of text from the file and returns as a tempstring
+void(float fhandle, string s, ...) fputs = #113; // writes a line of text to the end of the file
+float(string s) strlen = #114; // returns how many characters are in a string
+string(string s1, string s2, ...) strcat = #115; // concatenates two or more strings (for example "abc", "def" would return "abcdef") and returns as a tempstring
+string(string s, float start, float length) substring = #116; // returns a section of a string as a tempstring - see FTE_STRINGS for enhanced version
+vector(string s) stov = #117; // returns vector value from a string
+string(string s, ...) strzone = #118; // makes a copy of a string into the string zone and returns it, this is often used to keep around a tempstring for longer periods of time (tempstrings are replaced often)
+void(string s) strunzone = #119; // removes a copy of a string from the string zone (you can not use that string again or it may crash!!!)
+float FILE_READ = 0;
+float FILE_APPEND = 1;
+float FILE_WRITE = 2;

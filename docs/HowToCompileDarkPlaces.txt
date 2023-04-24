@@ -1,0 +1,165 @@
+
+How to compile on Linux:
+sudo apt-get install gcc
+sudo apt-get install g++
+sudo apt-get install zlib1g-dev
+sudo apt-get install libjpeg-dev
+sudo apt-get install libsdl2-dev
+make
+
+
+
+////////////////////////////////////
+////////////////////////////////////
+////////////////////////////////////
+
+
+Get the source code. The last and officials GitHub repository is https://github.com/DarkPlacesEngine/darkplaces. However you may want to use older version to ensure stability, but never use Nexuiz source. It is totally broken.
+Extract folder. Delete Debug and Release folders. If you don't need MacOS build remove DPiOS.xcodeproj and Darkplaces.app folders.
+Locate solution file (darkplaces-vs2019.sln) and open it. Try to compile Release build.
+
+Most likely you will get some SDL2 errors (something like LNK1181    cannot open input file SDL2test.lib).
+There are 2 ways to fix it:
+
+Simple (using NuGet). Go to solution. Press Project > Manage NuGet packets in top left corner. Go to Installed and uninstall all sdl2 packages.
+Now go back to Browse and search for sdl2. Install sdl2 package and hope it will be fixed after that.
+
+OR
+
+Adding library directly from website. I consider this more professional because you get last version and manually keep all files in the same place. go to SDL2 website Find download page, you will need something SDL2 for VisualC++ (should be named something like SDL2-devel-2.26.5-VC.zip)
+Create sdl2 folder inside project directory. Put include and lib folders from SDL package inside this folder.
+Go to solution. Press Project > Manage NuGet packets in top left corner. Go to Installed and uninstall all sdl2 packages.
+Go to Project Settigns > VC++ Directories.
+Add $(ProjectDir)sdl2\include; to the Include Directories line.
+Add $(ProjectDir)sdl2\lib\x86; to the Library Directories line.
+
+
+How listen here, It is very important to switch Runtime Library to Multi-threaded (/MT).
+Why? This builds in Microsoft Visuals C++ Package inside your executable file.
+Without this peoples with no VistualC++ installed will get various DLL missing errors.
+So you will have to create an installer for your game and ship it with 30 mb redistribute VistualC++ package.
+Some people have completely broken windows and redistribute package wont work for them or it will work after reboot. Gamers don't like when game does not work out of the box.
+There is no reason not to use /MT over /MD. /MT will make your life simpler and free you from missing DLL complains!.
+
+To enable Multi-threaded (/MT) open Project settings, set it to Release, go to C/C++ > Code Generation > Runtime Library and switch it to Multi-threaded (/MT).
+
+
+
+
+Improvements
+
+
+Now lets discuss some fixes we can make. First thing you probably want to do is change your game directory and game name. To do this open com_game.c and find
+{ GAME_NORMAL, GAME_NORMAL, "", "-quake", "DarkPlaces-Quake", "DarkPlaces-Quake", "id1", NULL, "dp", "darkplaces" },
+
+change it to something like
+{ GAME_NORMAL, GAME_NORMAL, "", "", "My Game Name", "MyGameName", "data", NULL, "mygame", "mygamename" },
+
+
+
+How to fix Alt+Tab doesn work?
+Open cl_screen.c, go to the bottom of void CL_UpdateScreen(void)
+Add the following code to the end of function (before } )
+
+
+#ifdef WIN32
+ if (vid_fullscreen.integer && GetAsyncKeyState(VK_MENU) && GetAsyncKeyState(VK_TAB)) //KleskBY Alt-Tab Fix
+ {
+	ShowWindow(FindWindowA("SDL_app", NULL), SW_MINIMIZE);
+ }
+#endif
+
+
+Another nice thing will be removing console from loading screen.
+Open cl_screen.c, find SCR_DrawConsole and make it look like this
+
+
+
+void SCR_DrawConsole (void)
+{
+    scr_con_margin_bottom = SCR_InfobarHeight();
+    if (key_consoleactive & KEY_CONSOLEACTIVE_FORCED)
+    {
+        if ((cls.state == ca_connected || cls.connect_trying))
+        {
+            if (scr_con_current) //Replaces console with loading screen when joining server.
+            {
+                Con_DrawConsole(vid_conheight.integer - scr_con_margin_bottom);
+            }
+            else
+            {
+                Con_DrawNotify();
+                
+                int w, h, sw, sh, f, x, y;
+                cachepic_t* pic = Draw_CachePic_Flags(scr_loadingscreen_picture.string, CACHEPICFLAG_NOTPERSISTENT);
+                w = Draw_GetPicWidth(pic);
+                h = Draw_GetPicHeight(pic);
+
+                // apply scale
+                w *= scr_loadingscreen_scale.value;
+                h *= scr_loadingscreen_scale.value;
+
+                // apply scale base
+                if (scr_loadingscreen_scale_base.integer)
+                {
+                    w *= vid_conwidth.integer / (float)vid.width;
+                    h *= vid_conheight.integer / (float)vid.height;
+                }
+
+                // apply scale limit
+                sw = w / vid_conwidth.integer;
+                sh = h / vid_conheight.integer;
+                f = 1;
+                switch (scr_loadingscreen_scale_limit.integer)
+                {
+                case 1:
+                    f = max(sw, sh);
+                    break;
+                case 2:
+                    f = min(sw, sh);
+                    break;
+                case 3:
+                    f = sw;
+                    break;
+                case 4:
+                    f = sh;
+                    break;
+                }
+                if (f > 1)
+                {
+                    w /= f;
+                    h /= f;
+                }
+
+                x = (vid_conwidth.integer - w) / 2;
+                y = (vid_conheight.integer - h) / 2;
+
+                DrawQ_Pic(x, y, Draw_CachePic_Flags(scr_loadingscreen_picture.string, CACHEPICFLAG_NOTPERSISTENT), sw, sh, 1, 1, 1, 1, 0);
+            }
+        }
+        else Con_DrawConsole(vid_conheight.integer - scr_con_margin_bottom);
+    }
+    else
+    {
+        if (scr_con_current) Con_DrawConsole(min((int)scr_con_current, vid_conheight.integer - scr_con_margin_bottom));
+        else con_vislines = 0;
+    }
+}
+
+If you don't want engine to store user data in Saved Games or some other nasty random folder go to fs.c and add the following code before
+        // and finally, we picked one...
+        FS_ChooseUserDir((userdirmode_t)dirmode, fs_userdir, sizeof(fs_userdir));
+        Con_DPrintf("userdir %i is the winner\n", dirmode);
+
+
+char vabuf[1024];
+int fileTest = FS_SysOpenFD(va(vabuf, sizeof(vabuf), "%s/test", gamedirname1), "a", false); //FS_SysOpenFD("test.txt", "a", false);
+if (fileTest >= 0)
+{
+	close(fileTest);
+	dirmode = USERDIRMODE_NOHOME;
+}
+
+
+If you want to prevent deatmatch cvar from reset go to sv_ccmds.c and comment line
+else Cvar_Set (&cvars_all, "deathmatch", "1"); 

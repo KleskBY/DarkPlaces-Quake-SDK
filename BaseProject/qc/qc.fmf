@@ -1,0 +1,4 @@
+FTEManifestVer 1
+game "gamename" ///change this to isolate your mod from quake. if the game is known to the engine itself then other settings will receive default values unless overriden. Should be safe to use as a filename, so should have no spaces or full stops.
+name "gamename" ///this is the full name of your game that you wish the engine to display. Use spaces.
+gamedir "data"

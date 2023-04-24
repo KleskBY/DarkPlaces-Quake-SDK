@@ -1,0 +1,33 @@
+Bsp2Wad.exe    by Geoff Phillips   (c) 1997  Version 2
+(bug for Erased texture fixed)
+
+This program, written in assembler, lifts all the textures out of a BSP file
+as used in Quake, and creates a texture file (.WAD) ready for use
+in  Worldcraft or some other editor.
+
+To run, simply type BSP2WAD file.bsp  and instantly (because it's a fast piece
+of assembler code, and not any of this high-level "%&!^) you have your wad file.
+You can also specify an output filename, so BSP2WAD file.bsp blob.wad.
+
+
+---------------------------------------------------------------------------
+;tamper protection: the isitsame value for this exe is "Managers shake baldly
+with a book", if you want isitsame.exe to check this, go to my page
+
+
+Rights reserved.  This program may be freely distributed, but not may sold
+or released with other packages without my prior consent.
+Worldcraft is a trademark of Ben Morris, and Quake is a trademark of ID
+software.
+
+Contact binky@DeathsDoor.com or write to 9 The Don, Bletchley Milton Keynes
+MK3 7PX England.  If Bletchley sounds a dull place, just remember it was
+here that Colossus was built during World War 2, Turing, Enigma blah blah.
+
+
+Disclaimer:  If this program causes you any injury or loss, tough.  Use at
+your risk, though it's hard to see what on earth this program could do with
+simple file handling.
+
+
+

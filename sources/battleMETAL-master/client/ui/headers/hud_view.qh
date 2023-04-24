@@ -1,0 +1,278 @@
+/*
+battleMETAL
+Author: Peter Roohr
+Date: 2/17/2017
+mod - 5/11/2017
+mod - 9/15/2018
+mod - 04/26/2021
+Overview: the interface for hud rendering
+every hud ent has to implement this format
+*/
+
+//HUD CONSTANTS==============================
+vector HUD_COLOR_DEF;
+#define HUD_UID_IMG_HELM      1
+#define HUD_UID_ENERGY        2
+#define HUD_UID_ARM_PLAYER    3
+#define HUD_UID_SHIELD_PLAYER 4
+#define HUD_UID_ARM_TARGET    5
+#define HUD_UID_SHIELD_TARGET 6
+#define HUD_UID_WEP_TYPE1     7  //Weapon Icon over the Reload bar
+#define HUD_UID_WEP_TYPE2     8  //Weapon Icon is right to Reload Bar
+#define HUD_UID_RADAR_TYPE1   9  // radar status left to right, horizontal and 2 rows
+#define HUD_UID_RADAR_TYPE2   10 // radar status vertically oriented
+#define HUD_UID_RADAR_GRAPH   11
+#define HUD_UID_NAV           12
+#define HUD_UID_TARGET_NAME   13
+#define HUD_UID_TARGET_RANGE  14
+#define HUD_UID_ARM_TARG_VEC  15
+#define HUD_UID_ARM_TARG_BLD  16
+#define HUD_UID_MESSAGE_BOX   17
+#define HUD_UID_ENVIRO_BOX    18
+#define HUD_UID_RAM_METER     19
+#define HUD_UID_MSN_CLOCK     20
+#define HUD_UID_CHAT_BOX      21
+
+//FILE TAG VALUES - converted to above UID on-load.
+string HUD_TAGS[22];
+
+#define HUD_TAG_IMG_HELM      "HUD_TAG_IMG_HELM"
+#define HUD_TAG_ENERGY        "HUD_TAG_ENERGY"
+#define HUD_TAG_ARM_PLAYER    "HUD_TAG_ARM_PLAYER"
+#define HUD_TAG_SHIELD_PLAYER "HUD_TAG_SHIELD_PLAYER"
+#define HUD_TAG_ARM_TARGET    "HUD_TAG_ARM_TARGET"
+#define HUD_TAG_SHIELD_TARGET "HUD_TAG_SHIELD_TARGET"
+#define HUD_TAG_WEP_TYPE1     "HUD_TAG_WEP_TYPE1"
+#define HUD_TAG_WEP_TYPE2     "HUD_TAG_WEP_TYPE2"
+#define HUD_TAG_RADAR_TYPE1   "HUD_TAG_RADAR_TYPE1"
+#define HUD_TAG_RADAR_TYPE2   "HUD_TAG_RADAR_TYPE2"
+#define HUD_TAG_RADAR_GRAPH   "HUD_TAG_RADAR_GRAPH"
+#define HUD_TAG_NAV           "HUD_TAG_NAV"
+#define HUD_TAG_TARGET_NAME   "HUD_TAG_TARGET_NAME"
+#define HUD_TAG_TARGET_RANGE  "HUD_TAG_TARGET_RANGE"
+#define HUD_TAG_ARM_TARG_VEC  "HUD_TAG_ARM_TARG_VEC"
+#define HUD_TAG_ARM_TARG_BLD  "HUD_TAG_ARM_TARG_BLD"
+#define HUD_TAG_MESSAGE_BOX   "HUD_TAG_MESSAGE_BOX"
+#define HUD_TAG_ENVIRO_BOX    "HUD_TAG_ENVIRO_BOX"
+#define HUD_TAG_RAM_METER     "HUD_TAG_RAM_METER"
+#define HUD_TAG_MSN_CLOCK     "HUD_TAG_MSN_CLOCK"
+#define HUD_TAG_CHAT_BOX      "HUD_TAG_CHAT_BOX"
+
+
+#define AIM_FACE_FRONT 1
+#define AIM_FACE_LEFT  2
+#define AIM_FACE_RIGHT 3
+#define AIM_FACE_BACK  4
+
+//==========================================
+
+
+//HUD GLOBALS===============================
+  //CLIENT_stat_lock_state -set if player has lock missiles, this will alter reticle color when acquiring targets
+  float HUD_LOCK_FLAG;
+  vector HUD_FIXED_ANGLE;
+  float VIEW_OBS_ID;
+  entity hudStruts;
+  entity hudConsole;
+  
+  float HUD_VIEW_OFS;
+  vector HUD_VIEW_CL_ANGLES;
+  float HUD_ENERGY_ACTUAL;  //actual energy amount of player.
+  
+  vector RADAR_VORG;
+  vector RADAR_ORG;
+  vector RADAR_VCENTER;
+  vector RADAR_VSIZE;
+  
+  float HUD_WARN_ON;
+  float HUD_WARN_DIR;
+  float HUD_WARN_MARK;
+  float HUD_WARN_TIME = 2;
+  
+  float HUD_WARN_ENV_ON;
+  float HUD_WARN_ENV_MARK;
+  float HUD_WARN_ENV_TIME = 1;
+  float HUD_WARN_ENV_TYPES;
+  vector HUD_WARN_ENV_ORG;
+  
+  float HUD_INFO_ON;
+  float HUD_INFO_MARK;
+  float HUD_INFO_TIME = 1;
+  vector HUD_INFO_ORG;
+  vector HUD_INFO_SIZE;
+  string HUD_INFO_MSG;
+  float HUD_INFO_MSG_Y;
+  
+  float HUD_ALPHA_TIME;
+  float HUD_ALPHA_RATE;
+  float HUD_ALPHA_INC;
+  
+  //2.0.0: lock-on timer deprecated
+  //vector HUD_LOCK_COLOR;
+  //float HUD_LOCK_STATE_PREV;
+  //float HUD_LOCK_ALPHA;   
+  //float HUD_LOCK_ALPHA_RATE;
+  //float HUD_LOCK_SIZE;
+  //float HUD_LOCK_SIZE_RATE;
+  //float HUD_LOCK_TIME_START;
+  //float HUD_LOCK_TIME_END;
+  //float HUD_LOCK_STEP;  //timer step function
+  //float HUD_LOCK_STEP_RATE;
+  
+  float HUD_SHIELD_FLASH_ON;
+  float HUD_SHIELD_FLASH_TIME;
+  float HUD_SHIELD_FLASH;
+  float HUD_SHIELD_FLASH_RATE = 0.15;
+  
+  float HUD_ZOOM_ACTIVE;
+  float HUD_EXTERNAL_CAM_ACTIVE;
+  float HUD_EXTERNAL_CAM_DATA = 0;  //hardcoded to match 3ps_hud.hud
+  
+  #define HUD_SPRINT_ON "[EVASION ON]"
+  #define HUD_SPRINT_OFF "!- EVASION OFFLINE -!"
+  #define HUD_SPRINT_RAM "[RAM-SHOCKS READY]"
+  
+  float HUD_TACMAP_ON;
+  float HUD_SCORES_ON;
+  float HUD_SCORE_HEIGHT;
+  float HUD_SCORE_SURVEST_HEIGHT;
+  float HUD_SCORE_MILITAR_HEIGHT;
+  
+  /*vector HUD_OFFSET;
+  vector HUD_OFFSET_PREV;
+  vector HUD_OFFSET_LAST;
+  vector HUD_OFFSET_ORG;*/
+  
+//==========================================
+
+//HUD Text Data Arrays======================
+float UI_DATA_UIDS[32]; // - primary key / table for hud objects
+vector UI_DATA_POS[32];
+vector UI_DATA_SIZE[32];
+float UI_DATA_ALIGN[32];
+float UI_DATA_LABEL_FLAG[32];
+float UI_DATA_LABEL_ALIGN[32];
+float UI_DATA_AXIS_FLAG[32];
+vector UI_DATA_LABEL_OFS[32];
+vector UI_DATA_COLOR1[32];
+vector UI_DATA_COLOR2[32];
+string UI_DATA_IMG[32]; //background image if needed
+string UI_DATA_LABEL[32];
+float UI_DATA_WEPBIT[32];
+//==========================================
+
+float HUD_PITCH_MIN;
+float HUD_PITCH_MAX;
+
+#define HUD_ICON_POWER "gfx/hud/hud_icon_power.tga"
+#define HUD_ICON_SHIELD "gfx/hud/hud_icon_shield.tga"
+#define HUD_ICON_RAM "gfx/hud/hud_icon_ram.tga"
+#define HUD_ICON_SPRINT "gfx/hud/hud_icon_sprint.tga"
+
+#define HUD_MECH_CT "gfx/hud/hud_mech_ct.tga"
+#define HUD_MECH_ST "gfx/hud/hud_mech_st.tga"
+#define HUD_MECH_LA "gfx/hud/hud_mech_la.tga"
+#define HUD_MECH_RA "gfx/hud/hud_mech_ra.tga"
+#define HUD_MECH_LEG "gfx/hud/hud_mech_leg.tga"
+
+#define HUD_VEC_TRG  "gfx/hud/hud_vec_arm.tga"
+
+#define HUD_BUILD_TRG "gfx/hud/hud_build_arm.tga"
+
+#define HUD_HAZ_SHOCK "gfx/hud/hud_icon_shock.tga"
+#define HUD_HAZ_RAD "gfx/hud/hud_icon_rad.tga"
+#define HUD_HAZ_QUANT "gfx/hud/hud_icon_quant.tga"
+
+string HUT_RET_PIP_HRZ;
+string HUT_RET_PIP_VRT;
+string HUT_RET_LOK;
+string HUD_RET_HIT;
+string HUD_RAD_PIP_BLD;
+string HUD_RAD_PIP_MCH;
+string HUD_RAD_PIP_NAV;
+string HUD_RAD_PIP_VEC;
+
+string HUD_TRG_PIP_L;
+string HUD_TRG_PIP_R;
+string HUD_TRG_PIP_B;
+string HUD_TRG_PIP_U;
+
+string HUD_DMG_PIP_H;
+
+string HUD_TARGET_BOX;
+string HUD_TARGET_BOX_TL;
+string HUD_TARGET_BOX_TR;
+string HUD_TARGET_BOX_BR;
+string HUD_TARGET_BOX_BL;
+
+entity HUD_DATA_weapon;
+
+//void(float lockTime) hud_lock_control_start;  //2.0.0: DEPRECATED lock-on not timer-based anymore
+//void() hud_lock_frame; 
+
+void() hud_renderCrosshairDisabled;
+void(float hitdirection, float lockval, float unitAccuracy, float trg_shield) hud_renderCrosshairs;
+void(float hitdirection, float lockval, float unitAccuracy, float trg_shield) hud_renderCrosshair1; //I have no regrets for these
+void(float hitdirection, float lockval, float unitAccuracy, float trg_shield) hud_renderCrosshair2;
+void(float hitdirection, float lockval, float unitAccuracy, float trg_shield) hud_renderCrosshair3;
+void(float hitdirection, float lockval, float unitAccuracy, float trg_shield) hud_renderCrosshair4;
+//void(float hitdirection, float lockval, float unitAccuracy, float trg_shield) hud_renderCrosshair5;
+
+void(float hitDirBit) hud_renderDirectionHit;
+void(float targdir, float plrFaction, float trgfaction, float dattype) hud_renderTargetDirection;
+void(vector pos, float algn) hud_renderPitchIndicator;
+void(vector pos, float algn, float val) hud_renderReticleRange;
+void(vector pos, float algn, vector angle) hud_renderNavHeading;
+void(vector pos, float algn, float val, vector mSize, float lbl_algn, vector lbl_ofs, float meterAxis, float isClient, vector mColor) hud_renderShield;
+void(vector pos, float algn, float val, vector mSize, float lbl_algn, vector lbl_ofs, float meterAxis, vector mColor) hud_renderEnergy;
+void(vector grpCtr, vector pos, float val, vector mSize, string imgPiece, float thatTarget, float partFlag) hud_renderArmorMeter;
+void(vector pos, float algn, float lFlag, float lalgn, vector lblOfs, vector lblSize, float isTarget) hud_renderArmorGraph;
+void(vector vorg, float algn, float faction, vector radarOrg, float radarRange, float radarMode, vector siz) hud_renderRadar;
+void(entity blip, float plrFaction, float radRange ) hud_renderRadarContact;
+void(vector navOrg, float navState, float radRange ) hud_renderRadarNav;
+void(vector torg, float algn, float status, float radius, float flag) hud_renderRadarStatus1;
+void(vector torg, float algn, float status, float radius, float flag) hud_renderRadarStatus2;
+void(vector pos, vector imgSz, float algn, float w_bit) hud_renderWeapon;
+void(vector pos, vector imgSz, float algn, float w_bit) hud_renderWeapon2;
+void(vector org, vector pos, float algn, float val, float radRange, float tsize, vector mSize, float meterAxis, float targFaction) hud_renderShieldOverlay;
+void() hud_render_vip_overlay;
+void(vector org, vector pos, float algn, float faction1, float faction2, float radRange) hud_renderTargetOverlay;
+void(vector pos, float algn, float flag) hud_render_missionClock;
+void() hud_renderNavOverlay;
+void(vector vorg, float algn, vector siz, float val, float lFlag, float lalgn, vector lblOfs, vector lblSize) hud_renderArmorBuilding;
+void(vector vorg, float algn, vector siz, float val, float lFlag, float lalgn, vector lblOfs, vector lblSize) hud_renderArmorVehicle;
+void(vector post, float e_size, float e_fact, float e_alpha) hud_RenderRadar_Mech;
+void(vector post, float e_size, float e_fact, float e_alpha) hud_RenderRadar_Vehc;
+void(vector post, float e_size, float e_fact, float e_alpha) hud_RenderRadar_Building;
+void(vector post, float isOn, vector fac_clr) hud_RenderRadar_Nav;
+void(vector ofs, vector torg, vector porg, float algn) hud_renderTargetRange;
+void(vector ofs, float algn) hud_renderTargetName;
+void() hud_renderRepairValue;
+void(float warnOn, float warnDir) hud_render_warningBounds;
+void(float warnOn, vector orgCenter, float dmgTypes, float labelAlpha) hud_render_warningEnvironment;
+void(vector msgOrg, string messageVal, vector messageFont, float labelAlpha, float labelAlign) hud_render_message;
+void(vector ramOrg, vector ramSize, float ramValue, float ramAlign, float meterAxis, vector lbl_ofs, float lbl_algn) hud_render_ram;
+void( entity box ) hud_renderHighlight;
+void() hud_renderHighlight_frame;
+void( entity thePlayer ) hud_render_ally_names;
+void(vector org, entity allyTarget, float algn, float faction1, float radRange) hud_renderTargetOverlay_Ally;
+
+void() hud_render_tactical_map;
+void() hud_render_scoreboard;
+void( vector rowOfs, float itr, entity playerRow ) hud_render_score_row;
+void( vector panelOfs ) hud_render_scoreboard_dm;
+void( vector panelOfs ) hud_render_scoreboard_tdm;
+
+void() hud_render_info;
+
+//new text-based hud system
+void( float uid, float targetId ) hud_data_renderTarget_Shield;
+//vector( float wbit ) hud_data_weapon_info;
+void() data_hud_frame;
+void() data_hud_fps_cam;
+void() data_hud_external;
+
+//inspired by original inFront function
+float(entity trg) util_checkPointAngle;
+//inspired by original inFront function
+float(vector orig, vector srcOrg, vector srcAngl) util_checkPointAngleImpl;

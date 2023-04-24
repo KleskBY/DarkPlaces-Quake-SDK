@@ -1,0 +1,51 @@
+../../menu.dat
+//HEADERS---------------
+defs/menudefs.qc
+  ../common/input_keynums.qh
+  ../common/ui/ui_color_constants.qc
+  ../common/data/camp_loader.qh
+  ../common/ui/gui_api.qh
+  ../common/data/data_values_game.qc
+defs/headers/menu.qh
+defs/headers/menu_gfx.qh
+defs/headers/menu_api.qh
+
+//=======================
+
+defs/utils.qc
+../common/ui/gui_api.qc
+../common/ui/ui_color_player.qc
+defs/menu_api.qc
+
+../common/data/data_campaign.qc
+
+menu_main.qc
+
+//specific menus
+  menus/m_main.qc
+  
+  menus/m_training.qc
+  
+  menus/m_camp.qc
+    menus/m_newsave.qc
+      menus/m_newgame.qc
+    menus/m_load.qc
+    menus/m_save.qc
+    
+  menus/m_multiplayer.qc
+    menus/m_setup.qc
+    menus/m_host.qc
+    menus/m_join.qc
+    
+  menus/m_options.qc
+    menus/m_options_controls.qc
+    menus/m_options_graphics.qc
+      menus/m_options_effects.qc
+      menus/m_options_gfx.qc
+    menus/m_options_audio.qc
+    menus/m_options_gameplay.qc
+    
+  menus/m_credits.qc
+  menus/m_help.qc
+  //menus/m_resolution.qc
+  

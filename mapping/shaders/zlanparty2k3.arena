@@ -1,0 +1,7 @@
+{
+       map "zlanparty2k3"
+       bots ""
+       longname "Z-LANparty Center"
+       fraglimit 0
+       type "ffa"
+}

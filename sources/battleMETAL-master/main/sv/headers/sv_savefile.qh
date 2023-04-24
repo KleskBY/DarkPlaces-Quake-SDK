@@ -1,0 +1,21 @@
+/*
+battleMETAL
+Author: Peter Roohr
+Date: 3/17/2018
+mod: 6/7/2019
+Overview: 
+This code writes out the single player save file.
+The save file is mostly an inter-level intermediary file
+to track player unlocks
+*/
+
+//functions
+void(float override) savefile_load; //single player only
+void(string sv_nextmap) savefile_changemap;
+
+void() mapfile_coop_load;  //coop options
+void() mapfile_team_load;  //pvp options
+void() mapfile_dm_load;  //pvp options
+
+void( string theseMechs, string theseItems ) mapfile_setData_team1;
+void( string theseMechs, string theseItems ) mapfile_setData_team2;

@@ -1,0 +1,228 @@
+/*
+  battleMETAL
+  Date: 9/6/2018
+  Author: Peter Roohr
+  Overview: client particle system header
+*/
+
+/*a = ent.absmin
+b = ent.absMax
+c = mins
+d = maxs*/
+/*
+  #define BoxesOverlap(a,b,c,d) (
+  (a)[0] <= (d)[0] && (b)[0] >= (c)[0] && 
+    (a)[1] <= (d)[1] && (b)[1] >= (c)[1] && 
+      (a)[2] <= (d)[2] && (b)[2] >= (c)[2]
+  )
+*/
+float(vector a, vector b, vector c, vector d) BoxesOverlap={
+  return ((a_x <= d_x) && (b_x >= c_x) && (a_y <= d_y) && (b_y >= c_y) && (a_z <= d_z) && (b_z >= c_z));
+};
+
+/*
+  Fog fun
+*/
+float FOG_STATE;  //0 = no change, 1 = change
+float FOG_DENSITY;
+float FOG_RED;
+float FOG_GREEN;
+float FOG_BLUE;
+float FOG_ALPHA;
+float FOG_DIST_MIN;
+float FOG_DIST_MAX;
+float FOG_DIST_TOP;
+float FOG_FADE_DEPTH;
+
+float FOG_TARG_DENSITY;
+float FOG_TARG_RED;
+float FOG_TARG_GREEN;
+float FOG_TARG_BLUE;
+float FOG_TARG_ALPHA;
+float FOG_TARG_DIST_MIN;
+float FOG_TARG_DIST_MAX;
+float FOG_TARG_DIST_TOP;
+float FOG_TARG_FADE_DEPTH;
+
+//cache world values
+float FOG_WORLD_VAL;
+float FOG_WORLD_DENSITY;
+float FOG_WORLD_RED;
+float FOG_WORLD_GREEN;
+float FOG_WORLD_BLUE;
+float FOG_WORLD_ALPHA;
+float FOG_WORLD_DIST_MIN;
+float FOG_WORLD_DIST_MAX;
+float FOG_WORLD_DIST_TOP;
+float FOG_WORLD_FADE_DEPTH;
+
+float( float fogColor, float fogColorTarg  ) cl_particles_fogColorAdjust;
+float( float fogDist, float fogDistTarg ) cl_particles_fogDistAdjust;
+void() cl_particles_fogFrame;
+
+
+//Particle Box - clients can only ever have one active at a time.
+// I went with globals because being an entity doesn't really get us much AND, too many parms for the max func size (8)
+
+entity particleCubeMetaData;
+entity particleCubeMetaDataList;
+
+#define PTC_CUBE_TYPE_BASIC 1
+#define PTC_CUBE_TYPE_RAIN 2
+#define PTC_CUBE_TYPE_SNOW 3 
+
+float PTC_CUBE_UPDATE;
+float PTC_CUBE_ON;
+vector PTC_CUBE_ORG;
+float PTC_CUBE_TYPE;
+vector PTC_CUBE_MIN;
+vector PTC_CUBE_MAX;
+vector PTC_CUBE_VEL;
+float PTC_CUBE_COUNT;
+float PTC_CUBE_COLOR;
+float PTC_CUBE_GRAV;
+float PTC_CUBE_VEL_JITTER;
+float PTC_CUBE_LIFETIME;
+float PTC_CUBE_FLAGS;
+
+void() particle_box_ini;
+void() particle_box_think;
+
+
+//Particle globals - reduce func calls
+  //GENERIC
+float PTC_HIT_DIRT_SHOT_SML;
+float PTC_HIT_DIRT_SHOT_MED;
+float PTC_HIT_DIRT_SHOT_LRG;
+
+float PTC_HIT_DIRT_ENE_SML;
+float PTC_HIT_DIRT_ENE_MED;
+float PTC_HIT_DIRT_ENE_LRG;
+
+float PTC_HIT_DIRT_EXP_SML;
+float PTC_HIT_DIRT_EXP_MED;
+float PTC_HIT_DIRT_EXP_LRG;
+
+float PTC_STOMP_ICE;
+float PTC_STOMP_CITY;
+float PTC_STOMP_BADLND;
+float PTC_STOMP_TUNDRA;
+float PTC_STOMP_SAND;
+
+float PTC_DUST_ICE;
+float PTC_DUST_URBAN;
+float PTC_DUST_BADLND;
+float PTC_DUST_TUNDRA;
+float PTC_DUST_DESERT;
+
+float PTC_HIT_EXPL_SML;
+float PTC_HIT_EXPL_MED;
+float PTC_HIT_EXPL_LRG;
+
+//Particle data
+.entity effect1, effect2, effect3;
+
+.vector wind;
+
+.void() pcl_explode;  //self implementing, whoo
+.float pcl_effectnum;
+.float trail_effectnum;
+.vector pcl_velocity;
+.float pcl_lifetime;
+.float pcl_count;
+.float pcl_fadeout; //time when debris starts to fade out
+
+.float wait;
+.float spawnflags;
+.float count;
+.float count1;
+//.vector dest;
+
+//===================================
+
+void() particle_sys_ini_globals;
+
+
+vector() te_read_vector;
+vector() te_read_angle;
+
+//AI voice selector
+void( float randomBool ) ai_voice_ini;
+
+
+//ported from effectinfo_api
+void( vector org, vector windVel ) te_mech_crit;
+
+void( entity item )te_weapon_fire_handler;
+
+void() te_explode_mech_piece_th;
+void(entity piece) te_explode_mech_piece;
+
+void() te_building_fire_th;
+entity( entity targetBuilding ) te_building_fire_start;
+
+void( vector org, vector setVelocity, float total ) te_field_rad;
+void( vector org, float total ) te_field_rad_light;
+
+void( vector org, vector setVelocity, float total ) te_field_mineral;
+void( vector org, float total ) te_field_mineral_light;
+
+void( vector particleOrg, vector particleEnd ) te_field_quantum;
+void( vector org, float total ) te_field_quantum_light;
+
+void( vector org, float total ) te_unit_dust;
+void() te_unit_dust_set;
+
+void(vector entOrg, vector entAngl, float entSize, vector entMins, float leftBool) te_foot_stomp;
+
+/*
+  Client-side explosion shells
+*/
+void() te_missile_explode_th;
+void( vector org, float explodeSize, vector explodeColor, float bloom ) te_missile_explode;
+
+void() te_shield_hit_predraw;
+void() te_shield_hit_th;
+void() te_shield_hit;
+
+void() te_shield_explode_th;
+void( vector org, float vecSize ) te_shield_explode;
+
+
+void( vector explodeColor ) te_object_explode;
+
+/*
+  Wreck event is when a unit is destroyed in combat.
+  We send this event, and the client handles the entire presentation of it as much as possible.
+*/
+void() particle_vehicle_wreck_th;
+void( float modelIndex, float skinNum, float lifetime, float vecSize, vector entOrg, vector entAngl ) particle_vehicle_wreck;
+
+/*
+  When a missile explodes...
+*/
+void() particle_missile_explode_th;
+void( vector org, float explodeSize, vector explodeColor, float onShield ) particle_missile_explode;
+
+/*
+  When a mech piece is blown off;
+*/
+//void() particle_mech_chunk_th;
+//void( float modelIndex, float skinNum, float vecSize, vector entOrg, vector entAngl ) particle_mech_chunk;
+
+float(vector endPos, entity endEnt, float contentFlags) te_impact_type;
+
+vector( vector startOrg ) te_apply_wind;
+vector( vector entOrg, vector entAng, vector entMins, vector entMaxs ) util_pointNearBoxEdge;
+
+/*
+  mech corpse-piece
+*/
+entity(entity root, entity part, vector setAngle) te_mech_chunk_stand;
+
+/*
+  burning mech legs
+*/
+void( entity mechLegs ) te_mech_dead_legs;
+void() te_mech_dead_legs_burn;
+void() te_mech_dead_legs_smoke;

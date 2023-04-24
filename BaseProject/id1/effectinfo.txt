@@ -1,0 +1,88 @@
+effect dust
+count 30
+type alphastatic
+color 0xdbd8d5 0xedebe8
+size 12 28
+alpha 16 16 16
+airfriction 1
+liquidfriction 4
+originoffset 0 0 12
+originjitter 24 24 30
+velocityjitter 32 32 0
+gravity 0.3
+
+effect shotgun_muzzleflash
+countabsolute 7
+type smoke
+color 0x202020 0x404040
+tex 48 55
+size 2 3
+alpha 100 200 600
+sizeincrease 7
+originoffset 0 0 1
+originjitter 1.5 1.5 1.5
+velocityjitter 6 6 6
+velocitymultiplier 0.01
+lightradius 200
+lightradiusfade 2000
+lightcolor 2 1.5 0.2
+
+effect double_shotgun_muzzleflash
+countabsolute 15
+type smoke
+color 0x202020 0x404040
+tex 48 55
+size 2 3
+alpha 100 200 600
+sizeincrease 7
+originjitter 1.5 1.5 1.5
+velocityjitter 6 6 6
+velocitymultiplier 0.01
+lightradius 200
+lightradiusfade 2000
+lightcolor 2 1.5 0.2
+
+effect nailgun_muzzleflash
+countabsolute 5
+type smoke
+color 0x202020 0x404040
+tex 48 55
+size 2 3
+alpha 100 200 512
+originjitter 5 5 1
+velocityjitter 3 3 3
+velocitymultiplier 0.01
+gravity -0.02
+
+effect supernailgun_muzzleflash
+countabsolute 5
+type smoke
+color 0x202020 0x404040
+tex 48 55
+size 2 3
+alpha 100 200 600
+sizeincrease 7
+originoffset 0 0 1
+originjitter 1.5 1.5 1.5
+velocityjitter 6 6 6
+velocitymultiplier 0.01
+//lightradius 200
+//lightradiusfade 2000
+//lightcolor 1.6 0.2 2
+
+effect ak47_muzzleflash
+countabsolute 1
+type alphastatic
+//color 0x202020 0x404040
+tex 47 47
+size 1 2
+alpha 100 200 600
+sizeincrease 7
+time 0.001 0.001
+originoffset 0 0 1
+//originjitter 1.5 1.5 1.5
+//velocityjitter 6 6 6
+velocitymultiplier 0.01
+lightradius 200
+lightradiusfade 2000
+lightcolor 1.6 0.2 2

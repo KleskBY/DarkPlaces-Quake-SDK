@@ -1,0 +1,279 @@
+/*
+  battleMETAL
+  author: Peter Roohr
+  date: 04/13/2018
+  overview: header for menu_api
+*/
+
+//API GLOBALS
+//Main Menu Globals
+vector MENU_ORG;  //'root' menu origin and size, if this was more OO, then this is the 'parent' 
+vector MENU_SIZE;
+vector MENU_CTR;
+
+float RESO_CHANGE;
+
+float GAME_SAVES_MAX = 10;
+string GAME_SAVES[GAME_SAVES_MAX];
+string GAME_SAVES_DRAWNAME[GAME_SAVES_MAX];
+float GAME_SAVES_SKILL[GAME_SAVES_MAX];
+string GAME_SAVES_MAP[GAME_SAVES_MAX];
+float GAME_SAVES_NEWG[GAME_SAVES_MAX];
+
+entity TEXTFIELD_TARGET;
+entity KEYBIND_TARGET;
+float UI_INPUT_ACTIVE;  //buffer to track textfields
+float UI_INPUT_FILTER_MAX = 111;
+float UI_INPUT_FILTER[UI_INPUT_FILTER_MAX];  //filter out these chars;
+float UI_KEYBIND_ACTIVE;
+
+vector VID_RESO_SIZE[36];
+vector VID_RESO_HALF[36];
+string VID_RESO_NAME[36];
+float VID_RESO_TOTAL;
+
+float HOST_RATE_TABLE[7];
+string HOST_RATE_TABLE_NAME[7];
+
+// UI fields
+.string label;
+.float selected;
+.float menuId;
+.string image1;
+.float drawme;
+//.void() predraw;
+.void(entity myself) draw;
+.void(entity myself) isclick;  //internal, runs when clicked, if onClick() defined, then will execute within
+.void(entity myself) ischange;
+.void() onClick;
+//.void() onRollOver;
+.void() onChange;
+.string command;
+.float rolledover;
+.float align;
+.float alpha;
+.vector color;
+.vector select_color;
+.float data_bind;  //used in lists
+.float len; //used if needed to track char len of entity.
+.string data_text;
+.float subid; //sub menu, used sparingly
+.vector size; //used to size elements
+.vector drawSize; //computed from .size
+.vector drawOrg; //actual org after adjusting to pixel size
+.entity targ;
+.float fontId;
+//some of this ported over from ui_defs in the client code
+float(vector mpos, vector org, vector sz) menu_checkMouseInBounds;
+float(vector org, vector list_size, vector row_size, float max_items, float space) listListener;
+
+//new stuff
+void() menu_ini_txtfilter;
+//void() menu_ini_keyfilter;
+void() menu_scan_saves;
+void() menu_exit_togame;
+void(float menu_id) menu_clear_items;
+float(float keynr, float uiFlags) menu_textfilter_validate;
+void(float keynr, float ascii) menu_do_textfield;
+void(float keynr, float ascii) menu_do_keybind;
+void(string bind_cmd) menu_keybind_change;
+//string(float keynr) menu_keybind_get;
+vector(string comd) menu_keybind_keyfor;
+float() menu_getvideo_modeid;
+string(float id) menu_getvideo_clean;
+
+string(float val) menu_float_bool;
+
+//void() render_predraw;
+void(entity btn) render_btn;
+void(entity btn) render_btn_txt;
+void(entity btn) render_chkbox;
+void(entity lbl) render_lbl_img;
+void(entity lbl) render_lbl_text;
+void(entity pnl) render_txt_pnl;
+
+void(entity txt) render_textfield;
+void(entity txt) render_bindfield;
+
+entity() btn_new_blank;
+entity() new_ui_elm;
+entity(vector org, vector siz, string lbl, vector clr, float algn, float menu_id, float alph, float flgs) lbl_text;
+entity(vector org, vector siz, string img1, vector clr, float algn, float menu_id, float alph, float flgs) lbl_img;
+entity(vector org, vector siz, string img1, float algn, float menu_id, void() click, vector clr, vector hclr, float alph, float flgs) btn_img_callback;
+entity(vector org, vector siz, float algn, float menu_id, void() click, vector clr, vector checkColor, float alph, float flgs) btn_check_callback;
+entity(vector org, vector siz, string txt, float algn, float menu_id, void() click, vector clr, vector hclr, float alph, float flgs) btn_text_callback;
+entity(vector org, vector siz, string img1, float algn, float menu_id, string commd, vector clr, vector hclr, float alph, float flgs) btn_img_command;
+
+entity(vector org, vector siz, float charlen, void()  onchange, float algn, float menu_id, vector clr, vector hclr, float alph, float flgs) inp_textfield;
+entity(vector org, vector siz, void() onchange, string lblText, string ini_bind_cmd, float menu_id, vector clr, vector hclr, float alph, float flgs) inp_keybindfield;
+
+entity(vector org, vector siz, string txt, vector clr, float algn, float menu_id, float alph, float flgs) text_panel;
+
+void() m_sys_doclick; //called by all menus to process widget clicks
+void() btn_noclick={};  //simple null function
+void(entity myself) btn_isclick;
+void(entity myself) txtfld_isclick;
+void(entity myself) txtfld_ischange;
+
+void(entity myself) bindfld_isclick;
+void(entity myself) bindfld_ischange;
+
+void() btn_onClick_runCommand;
+
+//smaht menu alignments
+void(vector mOrg, vector mSize) menu_parent_setup;
+vector( float y ) menu_parent_center_width;
+vector( float x ) menu_parent_center_height;
+//clearly super handy
+void() dynamic_precache =
+{
+	local float f;                                      // file handle, basically assigns a number to whatever file is open
+	local string ln;                                    // ln = line of the file being read
+	f = fopen("cache/precache_menu.txt", FILE_READ);        // opens "system/precache.txt" to be read
+	if (f != -1)                                        // if f = -1 then the file could not be found
+	{ 
+		ln = fgets(f);    
+		while(ln != "EOF")    
+		{ 
+      if( ln != "" && substring(ln,0, 2) != "//" ){ 
+        if(strstrofs(ln, ".png",0) != -1)   // this checks if the file extension is .png for a sound file
+        {
+          precache_pic(ln, 0);
+          if( cvar("developer") ){
+            dprint(strcat("loaded menu img : ", ln, "\n"));  //DEBUG
+          }
+        }
+      }
+			ln = fgets(f);
+		} 
+    fclose(f);
+	}
+};
+
+string(float typ) map_list_getmap ={
+	local float f, itr;
+	local string ln, found;
+  found = "";
+  itr = 0;
+  f = -1;
+  if(typ){
+    f = fopen("data/cache/maps_tdm.txt", FILE_READ);
+  }
+  else{
+    f = fopen("data/cache/maps_coop.txt", FILE_READ);
+  }
+  if (f != -1){ 
+    ln = fgets(f); 
+    while( strlen(ln) != 0 ){
+      if(strstrofs(ln, "//",0) == -1){
+        if(typ){
+          cacheGlobalString(MAPS_TDM[itr], ln)
+        }
+        else{
+          cacheGlobalString(MAPS_COOP[itr], ln)
+        }
+      }
+      itr = itr + 1;
+      ln = fgets(f);
+    }
+    fclose(f);
+	} 
+  return found;
+};
+
+/*
+  sv_masterextra is pernicious and wants to set itself
+  to the hardcoded defaults, instead, lets just make it a text file.
+*/
+  void() menu_setup_mainservers={
+  local float f;
+  f = fopen("data/cache/servers.txt", FILE_READ);
+  if (f != -1){
+    cvar_set("sv_master1", fgets(f));
+    cvar_set("sv_master2", fgets(f));
+    cvar_set("sv_master3", fgets(f));
+    cvar_set("sv_master4", fgets(f));
+    cvar_set("sv_masterextra1", fgets(f));
+    cvar_set("sv_masterextra2", fgets(f));
+  }
+  fclose(f);
+};
+
+/*
+ no, we need better standards because its not 2000 anymore.
+ also, turns out the AI in battleMETAL is REALLY chunky
+ AND this really only affects the transfer rate.
+ 
+ NOTE:
+  this maps to the `_cl_rate` cvar and the `rate X` command.
+  this value is rated in BYTES-PER-SECOND! very imporant.
+  current values I've put in are Megabits-per-second. 2021
+  
+  Co-op especially needs a higher rate for a few reasons:
+    1) AI sends update packets fairly frequently for nice movement.
+    2) many maps have a LOT of active AI on the table.
+*/
+void() menu_ini_ratelist={
+  HOST_RATE_TABLE[0] = 62500;  //0.5 mbps
+  HOST_RATE_TABLE[1] = 125000; //1   mbps
+  HOST_RATE_TABLE[2] = 187500; //1.5 mbps
+  HOST_RATE_TABLE[3] = 250000; //2   mbps
+  HOST_RATE_TABLE[4] = 312500; //2.5 mbps
+  HOST_RATE_TABLE[5] = 375000; //3   mbps
+  HOST_RATE_TABLE[6] = 625000; //5   mbps
+  
+  HOST_RATE_TABLE_NAME[0] = "0.5 MBps";
+  HOST_RATE_TABLE_NAME[1] = "1 MBps";
+  HOST_RATE_TABLE_NAME[2] = "1.5 MBps";
+  HOST_RATE_TABLE_NAME[3] = "2 MBps";
+  HOST_RATE_TABLE_NAME[4] = "2.5 MBps";
+  HOST_RATE_TABLE_NAME[5] = "3 MBps";
+  HOST_RATE_TABLE_NAME[6] = "5 MBps";
+};
+
+/*
+  Darkplaces source code hardcodes this, I guess quake doesn't actually
+  poll the display device for achievable ratios, so here we are :|
+  
+  oh apparently it does, in yet another poorly documented func:
+    getresolution(). <sigh>
+*/
+void() menu_ini_display_constants={
+  local float itr;
+  local vector res;
+  local float i;
+  local vector con;
+  for (i = -1; ; i++){
+    res = getresolution(i);
+    if (i >= 0 && res_x < 1){
+      break;
+    }
+    if(itr > 0){
+      VID_RESO_NAME[itr] = strzone( sprintf( "%s x %s",ftos( res_x), ftos(res_y)) );
+      VID_RESO_SIZE[itr] = res;
+      con_y = 480;
+      //match "vid_conwidthauto" but as a one-time calculation.
+      con_x = floor(con_y * res_x / (res_y * 1));
+      VID_RESO_HALF[itr] = con;
+    }
+    itr = itr + 1;
+  }
+  VID_RESO_TOTAL = itr;
+};
+
+void(string filename) menu_execute_cvar_list={
+  local float f;
+	local string ln;
+  f = fopen(filename, FILE_READ);
+	if (f != -1){
+		ln = fgets(f); 
+		while(ln != ""){ 
+			if(strstrofs(ln, "//",0) == -1){
+        tokenizebyseparator(ln, " ");
+        cvar_set(argv(0), argv(1));
+			}
+			ln = fgets(f);
+		}
+    fclose(f);    
+	} 
+};

@@ -1,0 +1,36 @@
+/*
+battleMETAL
+Author: Peter Roohr
+Date: 3/24/2017
+ mod 4/9//2017
+ mod 6/19/2019
+Overview: ui header file the deployment menu
+*/
+
+vector DEPLOY_MAP_ORG;
+
+//tooltips
+  vector DEPLOY_HELP_NAV_MAP;
+  vector DEPLOY_HELP_NAV_PICK;
+
+  vector DEPLOY_BUTTON_NAV_NEXT_ORG;
+  vector DEPLOY_BUTTON_NAV_PREV_ORG;
+
+//main hook for menu system
+void() menu_deployDrawFrame;
+
+//hook for input system
+void() menu_deployListener_onClick;
+void() menu_deployListener_onDrag;
+void() menu_deployListener_onHover;
+
+//Listener hooks calle by menu_deployListener
+void() navSelectListener;
+void() navListSelectListener;
+
+//panels
+void(vector ofs) menu_deploy_missionInfoPanel;
+void(vector ofs) menu_deploy_navInfoPanel;
+void(vector ofs) menu_deploy_mechInfoPanel;
+void(vector ofs) menu_deploy_mapOverviewPanel;
+void(vector ofs) menu_deploy_mapKeyPanel;

@@ -1,0 +1,14 @@
+../csprogs.dat
+
+client/defs.qc
+client/constants.qc
+common/constants.qc
+client/extensions.qc
+
+client/vars.qc
+client/kleshikstuff.qc
+
+client/leditor.qc
+
+client/sbar.qc
+client/main.qc

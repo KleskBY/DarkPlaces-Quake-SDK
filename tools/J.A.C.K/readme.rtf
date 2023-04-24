@@ -1,0 +1,55 @@
+{\rtf1\ansi\ansicpg1252\deff0\deftab708{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fswiss\fprq2\fcharset0 Arial;}{\f2\fswiss\fprq2\fcharset204{\*\fname Arial;}Arial CYR;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\nowidctlpar\sl360\slmult1\qc\lang1033\kerning1\b\fs32 J.A.C.K. Release Notes\b0\fs24\par
+\pard\nowidctlpar\b\fs20 Description\b0 : 3D-game level editor\fs24\par
+\b\fs20 Website\b0 : \lang255{\field{\*\fldinst{HYPERLINK "http://jack.hlfx.ru"}}{\fldrslt{\ul\cf1 http://jack.hlfx.ru}}}\lang1033\f0\fs24\par
+\b\fs20 Platforms\b0 : Windows, Linux\fs24\par
+\b\fs20 Resemblance\b0 : Worldcraft/Valve Hammer Editor, Q3Radiant\fs24\par
+\b\fs20 Development started\b0 : 20/08/2013\fs24\par
+\b\fs20 Current version\b0 : 1.1.1064 (public beta)\fs24\par
+\par
+\pard\nowidctlpar\sl360\slmult1\b Supported Games\b0\par
+\pard\nowidctlpar\li113\fs20 Half-Life\fs24\par
+\fs20 Quake\fs24\par
+\fs20 Quake II\par
+Hexen II\fs24\par
+\fs20 Quake III\par
+\f1 Gunman Chronicles\f0\fs24\par
+\pard\nowidctlpar\par
+\pard\nowidctlpar\sl360\slmult1\b Main Features\b0\par
+\pard\nowidctlpar\li113\sa120\qj\b\fs20 Cross-Platform Editing\b0 : the editor is being developed on a cross-platform Qt framework and will be available both for Windows and Linux users. We do our best to provide the same level of comfort to Linux users, revealing them finally a convenient level editor!\par
+\b Large memory addressing support\b0 : 64-bit version on the editor overcomes the 2 Gb memory limit. Now you can store more history items and undo more recent actions.\par
+\b Extensibility\b0 : the editor supports plugins to extend its abilities. Plugins can be very versatile: from new brush primitives, texture and model formats to new game configurations with their own import and export formats. Plugins can share the functionality with each-other: so that WAD3 texture format used by Half-Life can be easily "plugged" into Quake and used along with its "native" WAD2 format, certainly with compilers that also support it.\fs24\par
+\b\fs20 Game Formats\b0  \b Support\b0 : because of flexible plugin system the editor supports many formats of game resources and correctly displays them. They are models of different formats(Quake MDL, Half-Life MDL, Quake2 MD2), sprites (Quake SPR, Half-Life SPR, Quake2 SP2), map sources (MAP, RMF). There is an ability of import and export in RMF format preserving most of its specific features (object colors, grouping, visgroups), so that J.A.C.K. can be used along with VHE.\par
+\b Archive Support\b0 : J.A.C.K. can load models and sprites from game archives (PAK, PK3). This is useful if you open other's map which uses models, and your game resources are not unpacked.\fs24\par
+\b\fs20 Color Schemes\b0 : the editor's look-and-feel can be easily customized using the color schemes, both predefined and user-created. Almost all colors in viewports are customizable - from a background color to a color of Vertex Tool bullet's frame. Besides a general color of the application's window can be altered. In addition one can define his own presets in a configuration file.\fs24\par
+\b\fs20 Realtime Texture Effects\b0 : transparency, texture animation and scrolling support promotes a higher grade of perception of a level under development. Now one can estimate translucency of windows not only in a game, but also in the editor. You will be able to see your Quake III shader scripts almost the same as in the game! Along with that, special rendermodes of textures in Half-Life models are supported.\par
+\b Dynamic Sky Rendition\b0 : the editor renders skyboxes in the same way games do. In addition, there are layered clouds in Quake, rotating skybox in Quake II, and shader effects in Quake III supported. To facilitate the choice of a certain sky in map properties, a drop-down combo with icons was added.\par
+\b Embedded Shader Editor\b0 : now the creation process of shaders for Quake III and other games based on its engine becomes delightful. You can not only preview effect changes in real time, but also utilize such convenient features, as automatic source code formatting, syntax highlighting and keyword auto-completion.\fs24\par
+\b\fs20 Large Map Support\b0 : the editor enables working with levels of large size, up to 262144 x 262144 units, now it is simply set up in the Preferences. Now one can easily crate levels for mods with a support of large outdoors.\fs24\par
+\b\fs20 Multiple VisGroups per Object\b0 : hence an object can exist in several visgroups. In J.A.C.K., VisGroups are never created automatically upon hiding a level fragment: hide/show mechanism doesn't rely on grouping anymore. However VisGroups allow to hide certain logical groups of objects along with color coding, in other words, act as a regulation tool.\fs24\par
+\b\fs20 Textures Bound to Game Configurations\b0 : one more important innovation is texture binding to game configurations instead of a global texture list. This feature allows, for example, address different WAD files in different mods and work with them independently.\fs24\par
+\b\fs20 Loading Resources on Demand\b0 : to speed things up, the editor precaches the resources on startup. However within a considerable amount of game configurations this process may take a long time. To deal with this issue, there is an option to precache only the resources needed in the immediate work. Working with a Half-Life level, the editor precaches only models and textures for this game, saving system's memory. Upon loading a Quake level, J.A.C.K. will add its resources to the load.\par
+\b Curved surfaces\b0 : the editor supports curved surfaces (patches) used in games based on Quake III engine, and also contains instruments making work with them easier: rotating around a control point, randomizing control points, and other.\par
+\b Path Tool\b0 : a new instrument considerably facilitates the process of creating paths for trains, mosters and other objects. You can copy and paste paths in a map, join and split them, invert and convert to linked set of entities.\par
+\b Improved Arch Tool\b0 : arch creation instrument got new abilities. Now it allows triangulation upon creation, fitting arches to selection box, estimation of proportions using a grid. Also it is possible to create smooth ramps.\par
+\b UV-Lock\b0 : the new feature emulates 3D model editor functionality where texture coordinates are bound to vertices. Although such emulation is not completely possible, the editor sometimes allows to achieve previously almost impossible ways to texture faces, e.g. skewing a texture along with a brush side.\par
+\b Additional Instruments\b0 : along with Worldcraft/Valve Hammer Editor instruments one got used to, the editor supports some specific features: either original or adopted from Radiant's ideology. For example, there are such new functions, as brush merging, scaling texture lock, validity restrictions in Vertex Manipulation mode, model rendition in 2D viewports (including the translation/rotation preview), scaling models with Alt key pressed, creation of logical connections for entities using Ctrl+K, separate tie object to entity function. On a new level creation, the editor prompts for a basic room, which is very convenient for validation of a game configuration or, perhaps, testing specific entities.\par
+\b Autosave\b0 : you can setup autosave function to protect your project from editor crashes or own design errors.\fs24\par
+\b\fs20 Extended FGD Format\b0 : the file format describing game entities was extended for the specific needs of J.A.C.K. For example, the new format enables displaying angles of entities using arrows, rendition of light sources as octahedrons, and introduces a help system for entities and their parameters. You can extend your own FGD per existing samples (e.g., halflife.fgd distributed with the editor).\par
+\b Multilingual Support\b0 : switch to your native language when using the editor! Now there is no need to consult a dictionary to find out what either menu command does, or to understand a reason for an error. Presently there are English, Russian and Ukrainian languages supported. Languages can even be switched dynamically without restarting the editor.\par
+\b Update Check: \b0 the editor can automatically check for new version available and notify you, so you can immediately download and install the update.\fs24\par
+\b\fs20 Miscellaneous\b0 : the editor supports precise selection of models in 3D viewport, loading and rendition of portal files (*.prt) and hulls (*.p0-p3), assigning a random yaw to entities, multiple texture fitting, texture replacement with scaling, viewing of tiled texture borders\lang1049\f2 , \lang1033\f0 context menus for entity creation and many other pleasant little things, and there is no good to enumerate them all. Just install the editor and look at your own!\fs24\par
+\pard\nowidctlpar\par
+\pard\nowidctlpar\sl480\slmult1\b Authors\b0\par
+\pard\nowidctlpar\b\fs20 Programming, logo design, website\b0 : XaeroX.\fs24\par
+\b\fs20 Revision of Quake and Quake2 compilers\b0 : DarkEssence, FreeSlave.\par
+\b Localization\b0 : XaeroX (russian), Flash (ukrainian), George (byelorussian), Val (Polish).\fs24\par
+\b\fs20 Beta testing\b0 : DarkEssence, FreeSlave, GNU/Hurt, Phantomas, Skaarj.\par
+\b\f1 Additional\lang1049\f2  \lang1033\f1 FGD\b0 : XaeroX, Scrama, H-3D, TCHORGO.\par
+\b Special Thanks\b0 : H-3D, Zheka.\f0\fs24\par
+\par
+\fs20 Thank you for installing J.A.C.K.!\fs24\par
+\fs20 Chain Studios, 2013-2016\fs24\par
+}
+ 

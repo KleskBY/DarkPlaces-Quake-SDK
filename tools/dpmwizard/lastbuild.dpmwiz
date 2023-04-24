@@ -1,0 +1,28 @@
+[Generic]
+Version= 1
+Action= 1
+Format= 1
+BuildPK3= 0
+BuildPK3_Name=berny
+BuildPK3_Compress= 0
+RemoveHeader= 0
+SaveProjectInArchives= 0
+ViewConverterOutput= 0
+AddSourcesToBuild= 0
+[SMDtoDPM]
+NumScenes= 7
+FilesPath=D:\Quake Programs\Half-Life MDL Decompiler 1.2\zombie2_0
+Scene0=berny.smd
+Scene1=idle01.smd
+Scene2=walk_2.smd
+Scene3=attackB.smd
+Scene4=attackC.smd
+Scene5=attackF.smd
+Scene6=deathbackshot_1.smd
+ModelName=zombie
+ModelPath=models\
+ModelOfsX= 0
+ModelOfsY= 0
+ModelOfsZ= 0
+ModelRotate=-90
+ModelScale= 1

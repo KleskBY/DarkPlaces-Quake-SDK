@@ -1,0 +1,23 @@
+[Generic]
+Version= 1
+Action= 1
+Format= 1
+BuildPK3= 0
+BuildPK3_Name=enforcer
+BuildPK3_Compress= 0
+RemoveHeader= 0
+SaveProjectInArchives= 0
+ViewConverterOutput= 0
+AddSourcesToBuild= 0
+[SMDtoDPM]
+NumScenes= 2
+FilesPath=W:\SVN\GitHub\DpmWizard\testmodel
+Scene0=Enforcer.smd
+Scene1=EnforcerAnimation.smd
+ModelName=enforcer
+ModelPath=models\
+ModelOfsX= 0
+ModelOfsY= 0
+ModelOfsZ= 0
+ModelRotate= 0
+ModelScale= 1

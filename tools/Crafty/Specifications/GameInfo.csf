@@ -1,0 +1,1045 @@
+"GameInfo"
+{
+	"Games"
+	{
+		"Game"
+		{
+			"Name"	"Generic"
+			"MaterialBrowser"
+			{
+				"References"
+				{
+					"Filter"
+					{
+						"Filter"	"*.bmp;*.gif;*.jpg;*.jpeg;*.png;*.spr;*.tga;*.vtf;*.wal"
+					}
+				}
+			}
+			"ModelBrowser"
+			{
+				"References"
+				{
+					"Filter"
+					{
+						"Filter"	"*.mdl"
+					}
+				}
+			}
+		}
+		"Game"
+		{
+			"Name"	"Half-Life"
+			"MaterialBrowser"
+			{
+				"References"
+				{
+					"RootFilter"
+					{
+						"Root"		"*.wad"
+						"Filter"	"*.bmp"
+					}
+				}
+			}
+			"ModelBrowser"
+			{
+				"References"
+				{
+					"RootFilter"
+					{
+						"Root"		"models"
+						"Filter"	"*.mdl"
+					}
+				}
+			}
+		}
+		"Game"
+		{
+			"Name"	"Source"
+			"MaterialBrowser"
+			{
+				"References"
+				{
+					"RootFilter"
+					{
+						"Root"		"materials"
+						"Filter"	"*.vmt"
+					}
+				}
+			}
+			"ModelBrowser"
+			{
+				"References"
+				{
+					"RootFilter"
+					{
+						"Root"		"models"
+						"Filter"	"*.mdl"
+					}
+				}
+			}
+		}
+	}
+	"Modifications"
+	{
+		"Modification"
+		{
+			"Game"		"Generic"
+			"Name"		"Generic"
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Counter-Strike: Source"
+			"Root"		"counter-strike source"
+			"MountPoints"
+			{
+				"MountPoint"	"counter-strike source shared.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"cstrike"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"EntityModel"
+				{
+					"ClassName"	"weapon_knife"
+					"Model"		"models/weapons/w_knife_t.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_flashbang"
+					"Model"		"models/weapons/w_eq_fraggrenade.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_hegrenade"
+					"Model"		"models/weapons/w_eq_fraggrenade.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_smokegrenade"
+					"Model"		"models/weapons/w_eq_smokegrenade.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_defuser"
+					"Model"		"models/weapons/w_defuser.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_c4"
+					"Model"		"models/weapons/w_c4.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_glock"
+					"Model"		"models/weapons/w_pist_glock18.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_usp"
+					"Model"		"models/weapons/w_pist_usp.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_p228"
+					"Model"		"models/weapons/w_pist_p228.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_deagle"
+					"Model"		"models/weapons/w_pist_deagle.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_fiveseven"
+					"Model"		"models/weapons/w_pist_fiveseven.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_elite"
+					"Model"		"models/weapons/w_pist_elite.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_m3"
+					"Model"		"models/weapons/w_shot_m3super90.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_xm1014"
+					"Model"		"models/weapons/w_shot_xm1014.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_tmp"
+					"Model"		"models/weapons/w_smg_tmp.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_mp5navy"
+					"Model"		"models/weapons/w_smg_mp5.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_ump45"
+					"Model"		"models/weapons/w_smg_ump45.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_p90"
+					"Model"		"models/weapons/w_smg_p90.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_mac10"
+					"Model"		"models/weapons/w_smg_mac10.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_galil"
+					"Model"		"models/weapons/w_rif_galil.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_ak47"
+					"Model"		"models/weapons/w_rif_ak47.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_sg552"
+					"Model"		"models/weapons/w_rif_sg552.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_famas"
+					"Model"		"models/weapons/w_rif_famas.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_m4a1"
+					"Model"		"models/weapons/w_rif_m4a1.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_aug"
+					"Model"		"models/weapons/w_rif_aug.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_scout"
+					"Model"		"models/weapons/w_snip_scout.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_g3sg1"
+					"Model"		"models/weapons/w_snip_g3sg1.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_sg550"
+					"Model"		"models/weapons/w_snip_sg550.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_awp"
+					"Model"		"models/weapons/w_snip_awp.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_m249"
+					"Model"		"models/weapons/w_mach_m249para.mdl"
+				}
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Day of Defeat: Source"
+			"Root"		"day of defeat source"
+			"MountPoints"
+			{
+				"MountPoint"	"day of defeat source.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"dod"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"EntityModel"
+				{
+					"ClassName"	"dod_control_point"
+					"Model"		"models/mapmodels/flags.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"dod_bomb_targe"
+					"Model"		"models/weapons/w_tnt_red.mdl"
+				}
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Half-Life Deathmatch: Source"
+			"Root"		"half-life deathmatch source"
+			"MountPoints"
+			{
+				"MountPoint"	"half-life deathmatch source.gcf"
+				"MountPoint"	"half-life source.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"hl1mp"
+				"SearchPath"	"hl1"
+				"SearchPath"	"hl2"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Half-Life: Source"
+			"Root"		"half-life source"
+			"MountPoints"
+			{
+				"MountPoint"	"half-life source.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"hl1"
+				"SearchPath"	"hl2"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Half-Life 2"
+			"Root"		"half-life 2"
+			"Default"	"1"
+			"MountPoints"
+			{
+				"MountPoint"	"half-life 2 content.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"EntityModel"
+				{
+					"ClassName"	"npc_combine_camera"
+					"Model"		"models/combine_camera/combine_camera.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"npc_turret_ground"
+					"Model"		"models/combine_turrets/ground_turret.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"npc_turret_ceiling"
+					"Model"		"models/combine_turrets/ceiling_turret.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"npc_turret_floor"
+					"Model"		"models/combine_turrets/floor_turret.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"npc_rollermine"
+					"Model"		"models/roller.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"npc_rollermine"
+					"Model"		"models/roller.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_dynamic_resupply"
+					"Model"		"models/items/healthkit.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_pistol"
+					"Model"		"models/items/boxsrounds.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_pistol_large"
+					"Model"		"models/items/largeBoxSRounds.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_smg1"
+					"Model"		"models/items/BoxMRounds.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_smg1_large"
+					"Model"		"models/items/LargeBoxMRounds.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_ar2"
+					"Model"		"models/items/BoxBRounds.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_ar2_large"
+					"Model"		"models/items/LargeBoxBRounds.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_357"
+					"Model"		"models/items/357ammo.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_357_large"
+					"Model"		"models/items/357ammobox.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_crossbow"
+					"Model"		"models/items/CrossbowRounds.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_box_buckshot"
+					"Model"		"models/items/BoxBuckshot.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_rpg_round"
+					"Model"		"models/weapons/w_missile_closed.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_smg1_grenade"
+					"Model"		"models/items/AR2_Grenade.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_battery"
+					"Model"		"models/items/battery.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_healthkit"
+					"Model"		"models/items/healthkit.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_healthvial"
+					"Model"		"models/items/healthvial.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_ar2_altfire"
+					"Model"		"models/items/combine_rifle_ammo01.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_suit"
+					"Model"		"models/items/hevsuit.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammo_crate"
+					"Model"		"models/items/ammocrate_rockets.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_item_crate"
+					"Model"		"models/items/item_item_crate.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_healthcharger"
+					"Model"		"models/props_combine/health_charger001.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_suitcharger"
+					"Model"		"models/props_combine/suit_charger001.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_crowbar"
+					"Model"		"models/weapons/w_crowbar.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_stunstick"
+					"Model"		"models/weapons/w_stunbaton.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_pistol"
+					"Model"		"models/weapons/w_pistol.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_ar2"
+					"Model"		"models/weapons/w_irifle.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_rpg"
+					"Model"		"models/weapons/w_rocket_launcher.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_smg1"
+					"Model"		"models/weapons/w_smg1.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_357"
+					"Model"		"models/weapons/w_357.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_crossbow"
+					"Model"		"models/weapons/w_crossbow.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_shotgun"
+					"Model"		"models/weapons/w_shotgun.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_frag"
+					"Model"		"models/weapons/w_grenade.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_physcannon"
+					"Model"		"models/weapons/w_physics.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_bugbait"
+					"Model"		"models/spore.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_alyxgun"
+					"Model"		"models/weapons/W_Alyx_Gun.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_annabelle"
+					"Model"		"models/weapons/W_annabelle.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"combine_mine"
+					"Model"		"models/props_combine/combine_mine01.mdl"
+				}
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Half-Life 2: Deathmatch"
+			"Root"		"half-life 2 deathmatch"
+			"MountPoints"
+			{
+				"MountPoint"	"half-life 2 deathmatch.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"hl2mp"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"Inherits"	"Half-Life 2"
+				"EntityModel"
+				{
+					"ClassName"	"weapon_slam"
+					"Model"		"models/weapons/w_slam.mdl"
+				}
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Half-Life 2: Episode One"
+			"Root"		"half-life 2 episode one"
+			"MountPoints"
+			{
+				"MountPoint"	"half-life 2 episode one.gcf"
+				"MountPoint"	"episode 1 shared.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"episodic"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"Inherits"	"Half-Life 2"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Half-Life 2: Episode Two"
+			"Root"		"half-life 2 episode Two"
+			"MountPoints"
+			{
+				"MountPoint"	"episode two content.gcf"
+				"MountPoint"	"episode two maps.gcf"
+				"MountPoint"	"episode two materials.gcf"
+				"MountPoint"	"episodic 2007 shared.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"ep2"
+				"SearchPath"	"episodic"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"Inherits"	"Half-Life 2"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Half-Life 2: Lost Coast"
+			"Root"		"lostcoast"
+			"MountPoints"
+			{
+				"MountPoint"	"lostcoast content.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"lostcoast"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"Inherits"	"Half-Life 2"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Condition Zero"
+			"Root"		"condition zero"
+			"MountPoints"
+			{
+				"MountPoint"	"condition zero.gcf"
+				"MountPoint"	"counter-strike.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"czero"
+				"SearchPath"	"cstrike"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Condition Zero Deleted Scenes"
+			"Root"		"condition zero deleted scenes"
+			"MountPoints"
+			{
+				"MountPoint"	"condition zero deleted scenes base content.gcf"
+				"MountPoint"	"condition zero deleted scenes models.gcf"
+//				"MountPoint"	"counter-strike.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"czeror"
+				"SearchPath"	"cstrike"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Counter-Strike"
+			"Root"		"counter-strike"
+			"MountPoints"
+			{
+				"MountPoint"	"counter-strike.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"cstrike"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Day of Defeat"
+			"Root"		"day of defeat"
+			"MountPoints"
+			{
+				"MountPoint"	"day of defeat.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"dod"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Half-Life"
+			"Root"		"half-life"
+			"MountPoints"
+			{
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Half-Life: Blue Shift"
+			"Root"		"half-life blue shift"
+			"MountPoints"
+			{
+				"MountPoint"	"half-life blue shift.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"bshift"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Half-Life: Deathmatch"
+			"Root"		"deathmatch classic"
+			"MountPoints"
+			{
+				"MountPoint"	"deathmatch classic.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"dmc"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Opposing Force"
+			"Root"		"opposing force"
+			"MountPoints"
+			{
+				"MountPoint"	"opposing force.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"gearbox"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Left 4 Dead"
+			"Root"		"left 4 dead"
+			"PlayerStart"	"info_survivor_position"
+			"MountPoints"
+			{
+				"MountPoint"	"pak01_dir.vpk"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"left4dead"
+				"SearchPath"	"pak01_dir.vpk"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"EntityModel"
+				{
+					"ClassName"	"weapon_ammo_spawn"
+					"Model"		"models/props/terror/ammo_stack.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_autoshotgun_spawn"
+					"Model"		"models/w_models/Weapons/w_autoshot_m4super.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_first_aid_kit_spawn"
+					"Model"		"models/w_models/Weapons/w_eq_medkit.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_hunting_rifle_spawn"
+					"Model"		"models/w_models/Weapons/w_sniper_mini14.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_molotov_spawn"
+					"Model"		"models/w_models/Weapons/w_eq_molotov.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_pain_pills_spawn"
+					"Model"		"models/w_models/Weapons/w_eq_painpills.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_pipe_bomb_spawn"
+					"Model"		"models/w_models/Weapons/w_eq_pipebomb.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_pumpshotgun_spawn"
+					"Model"		"models/w_models/Weapons/w_shotgun.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_rifle_spawn"
+					"Model"		"models/w_models/Weapons/w_rifle_m16a2.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_smg_spawn"
+					"Model"		"models/w_models/Weapons/w_smg_uzi.mdl"
+				}
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Left 4 Dead 2"
+			"Root"		"left 4 dead 2"
+			"PlayerStart"	"info_survivor_position"
+			"MountPoints"
+			{
+				"MountPoint"	"pak01_dir.vpk"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"left4dead2"
+				"SearchPath"	"left4dead2_dlc1"
+				"SearchPath"	"left4dead2_dlc2"
+				"SearchPath"	"left4dead2_dlc3"
+				"SearchPath"	"pak01_dir.vpk"
+				"SearchPath"	"hl2"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Portal"
+			"Root"		"portal"
+			"MountPoints"
+			{
+				"MountPoint"	"portal content.gcf"
+				"MountPoint"	"source 2007 shared materials.gcf"
+				"MountPoint"	"source 2007 shared models.gcf"
+				"MountPoint"	"source materials.gcf"
+				"MountPoint"	"source models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"portal"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"EntityModel"
+				{
+					"ClassName"	"npc_rocket_turret"
+					"Model"		"models/props_bts/rocket_sentry.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"prop_portal"
+					"Model"		"models/portals/portal1.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"weapon_portalgun"
+					"Model"		"models/weapons/w_portalgun.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"npc_portal_turret_ground"
+					"Model"		"models/combine_turrets/ground_turret.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"prop_glados_core"
+					"Model"		"models/props_bts/glados_ball_reference.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"npc_portal_turret_floor"
+					"Model"		"models/props/turret_01.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"npc_security_camera"
+					"Model"		"models/props/security_camera.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"prop_telescopic_arm"
+					"Model"		"models/props/telescopic_arm.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"prop_portal_stats_display"
+					"Model"		"models/props/Round_elevator_body.mdl"
+				}
+			}
+
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Ricochet"
+			"Root"		"ricochet"
+			"MountPoints"
+			{
+				"MountPoint"	"ricochet.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"ricochet"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Half-Life"
+			"Name"		"Team Fortress Classic"
+			"Root"		"team fortress classic"
+			"MountPoints"
+			{
+				"MountPoint"	"team fortress classic.gcf"
+				"MountPoint"	"half-life.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"tfc"
+				"SearchPath"	"valve"
+			}
+		}
+		"Modification"
+		{
+			"Game"		"Source"
+			"Name"		"Team Fortress 2"
+			"Root"		"team fortress 2"
+			"MountPoints"
+			{
+				"MountPoint"	"team fortress 2 content.gcf"
+				"MountPoint"	"team fortress 2 materials.gcf"
+				"MountPoint"	"source 2007 shared materials.gcf"
+				"MountPoint"	"source 2007 shared models.gcf"
+			}
+			"SearchPaths"
+			{
+				"SearchPath"	"tf"
+				"SearchPath"	"hl2"
+			}
+			"EntityModels"
+			{
+				"EntityModel"
+				{
+					"ClassName"	"item_teamflag"
+					"Model"		"models/flag/briefcase.mdl"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammopack_full"
+					"Model"		"models/items/ammopack_large.mdl"
+					"RotationRate"	"0 90 0"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammopack_medium"
+					"Model"		"models/items/ammopack_medium.mdl"
+					"RotationRate"	"0 90 0"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_ammopack_small"
+					"Model"		"models/items/ammopack_small.mdl"
+					"RotationRate"	"0 90 0"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_healthkit_full"
+					"Model"		"models/items/medkit_large.mdl"
+					"RotationRate"	"0 90 0"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_healthkit_medium"
+					"Model"		"models/items/medkit_medium.mdl"
+					"RotationRate"	"0 90 0"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"item_healthkit_small"
+					"Model"		"models/items/medkit_small.mdl"
+					"RotationRate"	"0 90 0"
+				}
+				"EntityModel"
+				{
+					"ClassName"	"team_control_point"
+					"Model"		"models/effects/cappoint_hologram.mdl"
+				}
+			}
+		}
+
+		#embed "GameInfoCustom.csf"
+	}
+}

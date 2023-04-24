@@ -1,0 +1,14 @@
+/*
+battleMETAL
+Author: Peter Roohr
+Date: 8/24/2020
+Overview: 
+  synchronizing leg models to the client
+*/
+
+float LEG_WALK_STEP_LEFT = 2;
+float LEG_WALK_STEP_RIGHT = 6;
+float LEG_WALK_FIRSTFRAME = 1;
+float LEG_WALK_NUMFRAMES = 8;
+
+void() predraw_legs;

@@ -1,0 +1,11 @@
+Initializing SDL.
+failed both pants and pants.tga
+failed both shirt and shirt.tga
+failed both jacket and jacket.tga
+failed both head and head.tga
+failed both cap and cap.tga
+SDL initialized.
+using an SDL opengl 800x600x16bpp surface.
+36269 frames rendered in 604.078000 seconds, 60.040260 average frames per second
+Quiting SDL.
+Quiting....

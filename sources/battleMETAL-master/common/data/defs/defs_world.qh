@@ -1,0 +1,65 @@
+/*
+battleMETAL
+Author: Peter Roohr
+Date: 01/11/2021
+Overview:
+  Rules/Server Info entity, shared by client and server, handy for syncro of server 
+*/
+
+entity ENT_SERVER_INFO;
+
+.float gameType;
+.float timeStart;
+.float timeEnd;
+.float serverFlags;
+//.float worldtype <- IMPORT
+.float missionStatusPrev;
+.float missionStatus;
+.float missionResult;
+.float ruleFraglimit;
+.float ruleTimelimit;
+.string nextMap;
+.float saveSlot;
+.float endRound;
+.float endRoundTime;
+.string svAbout;
+
+//re-targeted SENDFLAG values
+#define SENDFLAG_GAMETYPE 1
+#define SENDFLAG_STARTTIME 2
+#define SENDFLAG_ENDTIME 4
+#define SENDFLAG_SERVERFLAGS 8
+#define SENDFLAG_MISSION_STATUS 16
+#define SENDFLAG_MISSION_RESULT 32
+#define SENDFLAG_RULE_LIMIT_FRAG 64
+//float SENDFLAG_NEWENT         = 128 <- IMPORT
+#define SENDFLAG_RULE_LIMIT_TIME 256
+#define SENDFLAG_MAP_NEXT 512
+#define SENDFLAG_SAVESLOT 1024
+#define SENDFLAG_WORLDTYPE 2048
+#define SENDFLAG_ENDROUND 4096
+
+#ifdef SSQC
+entity() world_ini_serverInfo_ent;
+float( float isNew, float changedFlags ) world_rules_sendEntity;
+void() world_server_setRules;
+void() world_server_rules_frame;
+#endif
+#ifdef CSQC
+.float worldtype;
+void( float isNew, float changeFlags) world_rules_readEntity;
+/*
+  SV_INFO
+  because serverkey, getplayerkey, infoget, and infoadd are:
+    + pretty much undocumented,
+    + do not seem to work.
+    + missing info they prescribe to have
+  c'mon....
+*/
+float SV_TIMELIMIT; //getstatf(STAT_TIMELIMIT) is not populated until post-ClientConnect()
+float SV_FRAGLIMIT;
+float SV_ENDTIME;
+string SV_NEXTMAP;
+float SV_WORLDTYPE;
+string SV_ABOUT;
+#endif

@@ -1,0 +1,8 @@
+#pragma progs_dat  "../csprogs.dat"
+#pragma target fte
+#define CSQC
+
+#includelist
+fteextensions.qc
+main.qc
+#endlist

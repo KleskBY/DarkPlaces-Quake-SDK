@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{10E17905-B938-4351-9676-C19EDFAC58FD}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140_xp</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakePreprocessorDefinitions>
+    </NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>
+            .;
+            .\.vs;
+            .\.vs\mbspc;
+            .\.vs\mbspc\v14;
+            .\botlib;
+            .\build;
+            .\build\linux;
+            .\build\linux\obj;
+            .\build\win32;
+            .\build\win32\obj;
+            .\Debug;
+            .\Debug\mbspc.tlog;
+            .\doc;
+            .\mbspc;
+            .\obj;
+            .\obj\Win32;
+            .\obj\Win32\Debug;
+            .\qcommon;
+        </NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClInclude Include=".\botlib\aasfile.h" />
+    <ClInclude Include=".\botlib\be_aas.h" />
+    <ClInclude Include=".\botlib\be_aas_bsp.h" />
+    <ClInclude Include=".\botlib\be_aas_cluster.h" />
+    <ClInclude Include=".\botlib\be_aas_def.h" />
+    <ClInclude Include=".\botlib\be_aas_funcs.h" />
+    <ClInclude Include=".\botlib\be_aas_move.h" />
+    <ClInclude Include=".\botlib\be_aas_optimize.h" />
+    <ClInclude Include=".\botlib\be_aas_reach.h" />
+    <ClInclude Include=".\botlib\be_aas_sample.h" />
+    <ClInclude Include=".\botlib\be_interface.h" />
+    <ClInclude Include=".\botlib\botlib.h" />
+    <ClInclude Include=".\botlib\l_libvar.h" />
+    <ClInclude Include=".\botlib\l_log.h" />
+    <ClInclude Include=".\botlib\l_memory.h" />
+    <ClInclude Include=".\botlib\l_precomp.h" />
+    <ClInclude Include=".\botlib\l_script.h" />
+    <ClInclude Include=".\botlib\l_struct.h" />
+    <ClInclude Include=".\mbspc\aasfile.h" />
+    <ClInclude Include=".\mbspc\aas_areamerging.h" />
+    <ClInclude Include=".\mbspc\aas_cfg.h" />
+    <ClInclude Include=".\mbspc\aas_create.h" />
+    <ClInclude Include=".\mbspc\aas_edgemelting.h" />
+    <ClInclude Include=".\mbspc\aas_facemerging.h" />
+    <ClInclude Include=".\mbspc\aas_file.h" />
+    <ClInclude Include=".\mbspc\aas_gsubdiv.h" />
+    <ClInclude Include=".\mbspc\aas_map.h" />
+    <ClInclude Include=".\mbspc\aas_prunenodes.h" />
+    <ClInclude Include=".\mbspc\aas_store.h" />
+    <ClInclude Include=".\mbspc\be_aas_bsp.h" />
+    <ClInclude Include=".\mbspc\be_aas_bspc.h" />
+    <ClInclude Include=".\mbspc\l_bsp_ent.h" />
+    <ClInclude Include=".\mbspc\l_bsp_hl.h" />
+    <ClInclude Include=".\mbspc\l_bsp_q1.h" />
+    <ClInclude Include=".\mbspc\l_bsp_q2.h" />
+    <ClInclude Include=".\mbspc\l_bsp_q3.h" />
+    <ClInclude Include=".\mbspc\l_bsp_sin.h" />
+    <ClInclude Include=".\mbspc\l_cmd.h" />
+    <ClInclude Include=".\mbspc\l_log.h" />
+    <ClInclude Include=".\mbspc\l_math.h" />
+    <ClInclude Include=".\mbspc\l_mem.h" />
+    <ClInclude Include=".\mbspc\l_poly.h" />
+    <ClInclude Include=".\mbspc\l_qfiles.h" />
+    <ClInclude Include=".\mbspc\l_threads.h" />
+    <ClInclude Include=".\mbspc\l_utils.h" />
+    <ClInclude Include=".\mbspc\q2files.h" />
+    <ClInclude Include=".\mbspc\q3files.h" />
+    <ClInclude Include=".\mbspc\qbsp.h" />
+    <ClInclude Include=".\mbspc\qfiles.h" />
+    <ClInclude Include=".\mbspc\sinfiles.h" />
+    <ClInclude Include=".\qcommon\cm_local.h" />
+    <ClInclude Include=".\qcommon\cm_patch.h" />
+    <ClInclude Include=".\qcommon\cm_polylib.h" />
+    <ClInclude Include=".\qcommon\cm_public.h" />
+    <ClInclude Include=".\qcommon\qcommon.h" />
+    <ClInclude Include=".\qcommon\qfiles.h" />
+    <ClInclude Include=".\qcommon\q_platform.h" />
+    <ClInclude Include=".\qcommon\q_shared.h" />
+    <ClInclude Include=".\qcommon\surfaceflags.h" />
+    <ClInclude Include=".\qcommon\unzip.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include=".\botlib\be_aas_bspq3.c" />
+    <ClCompile Include=".\botlib\be_aas_cluster.c" />
+    <ClCompile Include=".\botlib\be_aas_move.c" />
+    <ClCompile Include=".\botlib\be_aas_optimize.c" />
+    <ClCompile Include=".\botlib\be_aas_reach.c" />
+    <ClCompile Include=".\botlib\be_aas_sample.c" />
+    <ClCompile Include=".\botlib\l_libvar.c" />
+    <ClCompile Include=".\botlib\l_precomp.c" />
+    <ClCompile Include=".\botlib\l_script.c" />
+    <ClCompile Include=".\botlib\l_struct.c" />
+    <ClCompile Include=".\mbspc\aas_areamerging.c" />
+    <ClCompile Include=".\mbspc\aas_cfg.c" />
+    <ClCompile Include=".\mbspc\aas_create.c" />
+    <ClCompile Include=".\mbspc\aas_edgemelting.c" />
+    <ClCompile Include=".\mbspc\aas_facemerging.c" />
+    <ClCompile Include=".\mbspc\aas_file.c" />
+    <ClCompile Include=".\mbspc\aas_gsubdiv.c" />
+    <ClCompile Include=".\mbspc\aas_map.c" />
+    <ClCompile Include=".\mbspc\aas_prunenodes.c" />
+    <ClCompile Include=".\mbspc\aas_store.c" />
+    <ClCompile Include=".\mbspc\be_aas_bspc.c" />
+    <ClCompile Include=".\mbspc\brushbsp.c" />
+    <ClCompile Include=".\mbspc\bspc.c" />
+    <ClCompile Include=".\mbspc\bspcmd.c" />
+    <ClCompile Include=".\mbspc\bsp_ent.c" />
+    <ClCompile Include=".\mbspc\bsp_hl.c" />
+    <ClCompile Include=".\mbspc\bsp_q1.c" />
+    <ClCompile Include=".\mbspc\bsp_q2.c" />
+    <ClCompile Include=".\mbspc\bsp_q3.c" />
+    <ClCompile Include=".\mbspc\bsp_sin.c" />
+    <ClCompile Include=".\mbspc\csg.c" />
+    <ClCompile Include=".\mbspc\faces.c" />
+    <ClCompile Include=".\mbspc\glfile.c" />
+    <ClCompile Include=".\mbspc\leakfile.c" />
+    <ClCompile Include=".\mbspc\log.c" />
+    <ClCompile Include=".\mbspc\map.c" />
+    <ClCompile Include=".\mbspc\map_hl.c" />
+    <ClCompile Include=".\mbspc\map_q1.c" />
+    <ClCompile Include=".\mbspc\map_q2.c" />
+    <ClCompile Include=".\mbspc\map_q3.c" />
+    <ClCompile Include=".\mbspc\map_sin.c" />
+    <ClCompile Include=".\mbspc\math.c" />
+    <ClCompile Include=".\mbspc\mem.c" />
+    <ClCompile Include=".\mbspc\nodraw.c" />
+    <ClCompile Include=".\mbspc\poly.c" />
+    <ClCompile Include=".\mbspc\portals.c" />
+    <ClCompile Include=".\mbspc\prtfile.c" />
+    <ClCompile Include=".\mbspc\qfiles.c" />
+    <ClCompile Include=".\mbspc\textures.c" />
+    <ClCompile Include=".\mbspc\threads.c" />
+    <ClCompile Include=".\mbspc\tree.c" />
+    <ClCompile Include=".\mbspc\utils.c" />
+    <ClCompile Include=".\mbspc\writebsp.c" />
+    <ClCompile Include=".\qcommon\cm_load.c" />
+    <ClCompile Include=".\qcommon\cm_patch.c" />
+    <ClCompile Include=".\qcommon\cm_test.c" />
+    <ClCompile Include=".\qcommon\cm_trace.c" />
+    <ClCompile Include=".\qcommon\md4.c" />
+    <ClCompile Include=".\qcommon\unzip.c" />
+  </ItemGroup>
+</Project>

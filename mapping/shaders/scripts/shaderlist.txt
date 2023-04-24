@@ -1,0 +1,22 @@
+// this file lists all the separate shader files
+
+common
+quake
+glass
+phong
+terrain
+turnpike
+common
+sky
+mxl_forest
+mxl_phong
+mxl_portal
+mxl_school
+mxl_ter
+mxl_tester
+spunks_elec
+spunks_trash2
+zterra
+zlan
+liquid
+fakelight

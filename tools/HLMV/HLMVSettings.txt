@@ -1,0 +1,71 @@
+commonSettings
+{
+	cvars
+	{
+		max_fps 60.00
+		r_powerof2textures 1
+		r_lighting_g 255
+		r_wireframecolor_b 0
+		r_wireframecolor_g 0
+		r_wireframecolor_r 255
+		r_lighting_b 255
+		r_lighting_r 255
+	}
+}
+gameConfigs
+{
+}
+hlmvSettings
+{
+	//No active config
+	recentFiles
+	{
+		recentFile E:\GameDev\QuakeSDK\tools\HLModelDecompiler\sky_test.mdl
+		recentFile "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\cstrike\models\help_urself\hu_svet.mdl"
+		recentFile "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\cstrike\models\help_urself\hu_rakovina.mdl"
+		recentFile "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\cstrike\models\help_urself\hu_key.mdl"
+	}
+	useTimerForFrame false
+	invertHorizontalDraggingDirection false
+	invertVerticalDraggingDirection false
+	correctSequenceGroupFileNames true
+	groundColor "216 216 175"
+	backgroundColor "63 127 127"
+	crosshairColor "255 0 0"
+	floorLength 100.000000
+	studiomdl E:\GameDev\ObjectN\Tools\HLModelDecompiler\studiomdl.exe
+	mdldec E:\GameDev\ObjectN\Tools\HLModelDecompiler\mdldec.exe
+	StudioMdlConfigs
+	{
+	}
+	MdlDecConfigs
+	{
+		settings
+		{
+			name 1
+			parameters
+			{
+			}
+			copyOutputFiles 0
+			outputFileDir ""
+			filters
+			{
+			}
+		}
+	}
+	activeMdlDecConfig 1
+	defaultOutputFileDir ""
+	window
+	{
+		maximized false
+		x 421
+		y 323
+		width 1377
+		height 595
+	}
+	controlPanelState
+	{
+		cameraName "Free View"
+		controlPanelName "Global Flags"
+	}
+}

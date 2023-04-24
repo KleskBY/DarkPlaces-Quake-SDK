@@ -1,0 +1,297 @@
+/*
+battleMETAL 
+Author: Peter Roohr
+Date: 7/9/2018
+rebuilt: 11/11/2020 - nodegraphs and full state refactor.
+Overview: 
+  AI API Header, covers multiple impl files
+*/
+
+//MACROs for AI
+#define macro_ai_setup(iniFunc) if(!(self.nextVecChoice)||self.nextVecChoice<=0){self.think=SUB_Remove;self.nextthink=time+0.05;return;}if((self.spawnflags&TRIGGER_ME)&&(self.targetname)){self.wait=1;if(self.delay>0){self.wait=self.delay;self.delay=0;}self.use=ai_unit_make_trigger;self.unit_ini=iniFunc;}else{self.think=iniFunc;self.nextthink=time+0.05;}
+
+// ticrates for AI
+float AI_RATE;
+float AI_RATE_LOCAL         = 0.05;
+float AI_RATE_NET           = 0.075;
+//AI STATE (LEGACY) CONSTANTS
+float ST_WALK               = 2;  //th_walk
+float ST_RUN                = 4;  //th_run
+float ST_MISSILE            = 7;  //th_missile
+float ST_MELEE              = 8;  //th_melee
+
+//AI TURRET CONSTANTS
+float TR_NORM               = 0;  //Turret follows the angles of its parent
+float TR_TARG               = 1;  //Turret ideal yaw is the parent's .enemy
+float TR_GOAL               = 3;  //Turret ideal yaw = parent's .goalentity
+float TR_YAW                = 4;  //Turret ideal yaw set by outside source
+float TR_LEFT               = 5;  //Turret ideal yaw is left-side away from ai_dir
+float TR_RIGHT              = 6;  //Turret ideal yaw is right-side awa from ai_dir;
+
+//VIS CONSTANTS
+float VIS_FAIL  = 0;  //complete LOS block via map, building, doodad
+float VIS_FRAC  = 1;  //LOS is solid, clear shot
+float VIS_FRN   = 2;  //A friendly is blocking the way
+float VIS_ENEMY = 3;  //a moving enemy is blocking the way.
+
+//GLOBALS
+vector enemySensorOrg;  //we only care about origin_x and origin_y, radar ignores _z
+vector selfSensorOrg;
+
+entity lastNode;        //minor optimization for assigning ai_nodes for patrols by reducing lookup times.
+
+void(entity newAttacker) ai_react_generic;
+entity alarm_ent; //per-frame global used to prevent near-endless alarm loops
+
+//////////////////this are set every frame by every AI, do not rely on these OUTSIDE the function they're called (like all the trace_* globals)
+//ENTITY VARS
+.float ai_react_buffer;             //prevents too many runs of th_react;
+.float ai_react_time;               //stat for react buffer
+
+.float entnum;
+.float ai_rank;
+.float ai_action_time;  //for executing action states
+.float ai_action_mod;   //how many times to repeat a frameset before adjusting
+.float ai_leading;      //how bad does the ai suck? 0.0 is ACE, 0.2 is pretty bad
+.float ai_minrange;     //minimum range of guns;
+.float ai_fov;          //the angle of the AI's view for visual target finding
+.float ai_view;         //range in game units of AI's vision
+.vector ai_angleLimits;       //x = min, y= max, z = pitch speed
+.float ai_viewtime;
+.float ai_viewcheck;    //interval for checking for enemies
+.float ai_patrol_speed; //a fraction of forward speed for any unit speed > 100
+.float voiceTime;       //when next to say something
+.float ai_voice_id;     //sent to the client for handling, ->see data_values_ai.qc
+.float helpTime;        //prevents flooding of help calls
+.float helpTimeDelay;
+.float yawCache;          //used to quickly cache yaw to do some per-frame mods
+.float ai_pauseTime_check; //time interval to check for pauses.
+.float ai_pauseTime_chance;  //chance that AI will pause.
+.float ai_pauseTime_wait;
+
+.float powerup;  //extra time to start up
+
+//Stat Equations
+//AI STATISTICS - ai_stats.qc
+void() ai_promote;
+float( float rank, float damg) ai_pilot_mod_damage;
+vector( float rank, vector spread ) ai_pilot_accuracy;
+void() ai_unit_ini_var;
+float() ai_pilot_minrange;
+void(float rank) ai_pilot_ini_stats;
+float( float rank ) ai_pilot_action_mod;
+void() ai_pilot_ini_rok;
+void() ai_pilot_ini_reg;
+void() ai_pilot_ini_vet;
+void() ai_pilot_ini_ace;
+
+//AI NODEGRAPH====================================
+void() node_setup;
+.float nq1; //to keep per-AI pathfinding costs low, we cache the next 4 nodes that the bot must go to
+.float nq2; //here, so that they're not asking the nodegraph to pathfind every frame for every bot.
+.float nq3;
+.float nq4;
+.float nq5;
+.float nq6;
+.float nq7;
+.float nq8;
+.float nq9;
+.float nq10;
+.float nq11;
+.float nq12;
+.float nq13;
+.float nq14;
+.float nq15;
+.float nq16;
+.float nq17;
+.float nq18;
+.float nq19;
+.float nq20;
+.float nq21;
+.float nq22;
+.float nq23;
+.float nq24;
+.float pathEndId; //actual end node to the path, used for early exit / check of nq1-16 path cache.
+.float nqLast;  //important, records nq1 AFTER visiting a node, and holds it locked until a certain time/distance.
+
+float( .float queueVar, float pathCountVal ) ai_nodegraph_set_queue_val;
+void() ai_nodegraph_clear_locks;
+void() ai_nodegraph_mark_start; //if a bot starts too close to a node, mark that node occupied.
+void() ai_nodegraph_clear_path; //mostly just for ini.
+float() ai_nodegraph_next; //updates .nodeQueue slots, returns FALSE if there are more nodes to go.
+void() ai_nodegraph_check_lastnode;
+float( float startId, float endId ) ai_nodegraph_trace_route;
+float( float nodeStartId, float nodeEndId ) ai_nodegraph_trace_norm;  //used mostly by patrol
+float( vector startPos, vector endPos ) ai_nodegraph_trace_vec;     // wraps nodegraph_trace() by allowing start / end pos
+float( vector startPos, float endId ) ai_nodegraph_trace_vecToNode; //given a map org, and a known endId
+float( float startId, vector endPos ) ai_nodegraph_trace_nodeToVec; //given a known endId, and a map org
+float(vector testOrg, float checkLock) ai_nodegraph_to_org; //find closest node to AI's desired patrol point.
+float( vector testOrg , float ignoreId, float checkLock ) ai_nodegraph_to_org_filter; //find closest node to AI's desired patrol point but ignore a specific node
+
+void() ai_nodegraph_debug_queue;  //just dump queue to console
+
+//AI TETHER FUNCTIONALITY
+ //no valid targets, AI will chill in a spot if it loses target, it  looks for new ones near it. no real fixed position.
+float TETHER_NONE   = 0; 
+
+//must have valid {ai_node_tether} to target, and will maintain that area. (ai_tether.qc).
+float TETHER_NODE   = 1;  //no target, default -> TETHER_NONE || skill > REG on mechs, TETHER_NOMAD;
+
+//must have valid {ai_node} to target, this will give it a patrol path (ai_patrol.qc).
+float TETHER_PATROL = 2;  
+
+//will wander the map randomly, finding random nodes to move to.  TODO
+float TETHER_NOMAD   = 3; 
+
+//marks its own starting origin as the original point to move back to.
+float TETHER_SELF   = 4;  
+.float tether;      //can be set by mapper too
+.vector tetherOrg;        //either closest tether-node, patrol node, or starting origin.
+
+////////////////////////////////
+//AI interaction functionality - ai_api.qc
+float() ai_can_spawn;
+void( entity t) ai_call_for_help;
+float(entity t) ai_valid_target;
+entity( float radiius ) ai_find_friend;
+void( entity t) ai_alert_close;
+float() ai_find_target_visual;
+float() ai_find_target_radar;
+void( entity ally, entity targ, float override ) ai_give_target;
+void() ai_unit_make_trigger;
+float(vector destOrg, float wishSpeed) ai_calc_move;
+entity(float checkDir) ai_get_next_node;
+entity() ai_node_tether_find;
+float( vector source, vector trgdst ) ai_check_terrain_move;
+float(float wishAngl,float wishSpeed) ai_check_slope;
+void(entity none) ai_NULL_pain={ };
+float() ai_NULL_missile={ return FALSE;};
+void() ai_frame_net_send;
+//entity(entity node) ai_node_to_target;  DEPRECATED - release v1.0.0
+//float(entity toCheck) ai_check_node_radius; DEPRECATED - release v1.0.0
+//float() ai_check_node_radius_targdist;  DEPRECATED - release v1.0.0
+
+.float combatFlags; //populated by ai_combat_state_frame()
+
+float( float scan_mode) ai_check_scan;
+void() ai_ranged_attack;
+float(entity wep) ai_attack_blockcheck;
+float(entity wep) ai_attack_checkEne;
+float( float bestAccuracy ) ai_wait_for_shot;
+void() ai_lock_on;
+
+//AI MAP FUNCS
+
+////////////////////////////////
+//AI VOICE STUFF - ai_voice.qc
+void() ai_sfx_spotted;
+void() ai_sfx_warning;
+void() ai_sfx_huntStart;
+void() ai_sfx_huntEnd;
+void() ai_sfx_dying;
+void() ai_sfx_dead;
+void() ai_sfx_kill;
+void() ai_sfx_roger;
+void() ai_sfx_help;
+
+////////////////////////////////
+//AI-CONTROL FUNCTIONS - ai_ctrl.qc
+//float() ai_blocked_teleport; DEPRECATED - release v1.0.0
+float(float angleOfTarget, float facingAngle, float limitMin, float limitMax) ai_check_turret_yaw;
+void() ai_touch;
+void() ai_face_goal;
+void(vector v) ai_face_origin;
+float() ai_check_pause;
+void() ai_face_targ;
+void() ai_face_targ_fade; //uses last-known position
+//void( float alt_low, float alt_max ) ai_fly_update;  DEPRECATED - release version - Roohr
+float(entity targ, float ang_limit, float useTurret) ai_check_face;
+float(vector v, float ang_limit, float useTurret) ai_check_face_origin;
+float(entity t, float ang, float useTurret) ai_check_targ_infront;
+float(entity targ) ai_check_range;
+float(entity targ) ai_check_vis;
+float() ai_attack;
+void() ai_setup_patrol;
+float( vector testA, vector testB ) ai_check_dist_node; // discard _z because we really don't / can't use it for distance checks- 
+                                                        //the core of the issue is the unit's z-height compared to the z-height of the node's origin.
+                                                        //if they differ too much, some units will NEVER 'reach' the node because of the z-height.
+
+//movement
+.vector moveDest;       //combat moves, target destination
+.entity patrolNode;
+.float ai_wishSpeed;    //calculated on entering a new move
+
+.float ai_state;      //  the current state, usually not accessed directly.
+.float ai_state_next;
+.float ai_state_last;
+
+.float ai_movewait;   //  set by ai_calc_move when entering a new move, this will be checked for completed move.
+.float ai_movedist;   //  AI-CODE-SET to desired number of frames for desired movement
+
+float ST_STAND                = 1;  //th_stand
+float ST_PTR                  = 2;
+
+////////////////////////////////
+//AI STATE FUNCTIONS - ai_state.qc
+void() ai_update;
+void() ai_turret_control;
+void() ai_leg_control;
+void( float estate ) ai_turret_set_state;
+void( float move ) ai_update_accuracy;
+
+//Lightweight state implementation
+.void() ai_unit_update;
+.void() ai_set_state;           //simply a cache to hold the state_frame() and allow code to use .think() freely.
+void() ai_frame_update;
+
+//Behavior state functions.
+void() ai_state_pause;
+void() ai_state_turret_frame;   //just for turrets.
+void() ai_state_lurker_frame;   // 'the basic', if no other behavior is set, run this one
+void() ai_state_brawler_frame;
+void() ai_state_hunter_frame;
+
+//Per-Frame behavior functions
+void() ai_state_set_pause;
+void( vector targDest, vector offsetTargDest, float turnSpeed, float walkSpeed ) ai_nodegraph_frame;
+void( float turnSpeed, float walkSpeed ) ai_nodegraph_patrol_frame;
+void() ai_nodegraph_combat_frame;
+void() ai_nodegraph_combat_brawler_frame;
+
+//Timers
+.float ai_timer_tracepath;  //probably the most important. the interval for querying the nodegraph for paths.
+.float ai_timer_breathe;    //used with fight_pause.
+.float ai_timer_checkTurn;  // if yawspeed too low for ideal_yaw over X time, this makes the bot turn harder.
+.float ai_timer_checkHunt;  // used by ai_state_hunter_frame() for hunting targets.
+.float ai_timer_checkTargFade;  //allows AI to turn to face target's last origin
+.float ai_timer_pathWait;     //if path finding failed on the frame AI requested it, wait a random amount of time.
+
+//Values
+.float ai_path_tries;     //super edge case, try different paths during combat if truly stuck, only combat though!
+.float ai_patrol_arrive;  //has arrived at patrolNode
+.float ai_freeze;         //debug tool, freezes AI
+.float ai_fight_pause;    //important part of the fighting step, the AI pauses, turns toward their target, not firing, allows player to 'breathe'
+.float ai_findPath;       //part of the queue system for 
+.float ai_hardTurn;       //when target destination yaw >= 90 from bot's angles_y
+.float ai_lastVis;        //used for to get per-frame state of target visiblity
+.float ai_is_targetfade;  //currently rotating to prev. target's cached position.
+.vector ai_fadePos;       //used for last known position rotate.
+.float ai_flee;           //is fleeing contact
+.float ai_last_pathWait;  //further stipples pathfinding by making AI wait a bit before trying to path to a spot again.
+.float ai_reverse;        //used when node angle is in the rear 90d of facing, potentially reducing move time.
+
+//DEBUG function
+//when you need the var-name for a global var value.
+string(float tether) dbg_tether={
+  switch(tether){
+    case TETHER_NODE:
+      return "TETHER_NODE";
+    case TETHER_PATROL:
+      return "TETHER_PATROL";
+    case TETHER_NOMAD:
+      return "TETHER_NOMAD";
+    case TETHER_NONE:
+      return "TETHER_NONE";
+  }
+  return "null";
+};

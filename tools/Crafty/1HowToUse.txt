@@ -1,0 +1,16 @@
+Crash fix:
+Inject crashfix.dll inside Crafty after opening it.
+
+Garrys mod:
+1.Extract workshop package with gmad
+2.Decompile map with BSPSOURCE including files (Extract embedded files)
+3.Rename folder with extracted files to vbsp.zip
+4.Move other files from package inside this folder
+5.Open vmf map.
+6.Go to file system and mount vbsp.zip folder.
+7.Reopen file
+
+Half-life:
+1. Set game to Half-life.
+2. Put WADs in C:\Program Files (x86)\Steam\steamapps\common\Half-Life\valve\
+3. Reopen map

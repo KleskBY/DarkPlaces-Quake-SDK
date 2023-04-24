@@ -1,0 +1,18 @@
+Textract win32 GUI version
+==========================
+
+0) Intro.
+This is the win32 GUI version of textract, unfortunately MFC :\.
+
+1) Usage.
+Select BSP and WAD file, click "Extract!".
+
+2) Bugs.
+If you find any bugs, feel free to report them.
+
+3) Legal stuff.
+Textract is free, the source is not available. However, the app is about 25k, I think that's a fair size in case you want to disassemble it =)
+
+
+
+~dp

@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d082b583-0b9c-49fe-9cd4-ca5c5fa0f642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{df160e65-f315-4d30-865d-c4610db297ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{77fc4c54-9f68-45d7-8388-4783d46dd318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{96d3fc70-e934-4a14-b1f2-fae13e7288ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\.vs">
+      <UniqueIdentifier>{1b3bffd9-ad19-4405-933f-199d1a60cc83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\.vs\mbspc">
+      <UniqueIdentifier>{48d30bb0-4bb7-41cb-8d0c-f2d5fad566c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\.vs\mbspc\v14">
+      <UniqueIdentifier>{473d2913-29af-4586-a8fa-69abb6755382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\botlib">
+      <UniqueIdentifier>{a2173523-2f9e-4556-94aa-753de7dd42e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\build">
+      <UniqueIdentifier>{c90360ff-4a27-4b5b-a1b9-a0ad6daf1915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\build\linux">
+      <UniqueIdentifier>{8fa0b1c9-e9e8-45b6-85cb-8b19ea896e25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\build\linux\obj">
+      <UniqueIdentifier>{ad8d80a0-8384-4685-9a7d-67a3450d0e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\build\win32">
+      <UniqueIdentifier>{3e6cfaa4-0f98-43ea-9d70-7d6927d97976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\build\win32\obj">
+      <UniqueIdentifier>{41dca0f5-8ac5-4803-b044-a78d818e63f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Debug">
+      <UniqueIdentifier>{1b7dc8b3-75ab-40f1-9899-d52d04cd35db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Debug\mbspc.tlog">
+      <UniqueIdentifier>{12ef1aff-54ea-40d5-8010-896ba8348b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\doc">
+      <UniqueIdentifier>{d3d014f7-3122-4dcd-b447-5b662665b453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mbspc">
+      <UniqueIdentifier>{edc487bb-16f3-41fa-a6df-763d7dfe3527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\obj">
+      <UniqueIdentifier>{5469186e-96fc-4b7d-ad77-191271a145e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\obj\Win32">
+      <UniqueIdentifier>{df5ec02c-45df-4c73-81b2-170307ec529d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\obj\Win32\Debug">
+      <UniqueIdentifier>{ca454c19-3c3b-4b00-812d-57320b817b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\qcommon">
+      <UniqueIdentifier>{34bddd51-96b0-4141-ad89-54bd8afe14a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{a26668f8-f5dd-4d58-ac66-9ec559042635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\.vs">
+      <UniqueIdentifier>{7adf382b-fe64-4163-8765-586b8c33ec46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\.vs\mbspc">
+      <UniqueIdentifier>{89ca680b-d8e4-4383-ac24-b8cdff2b56fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\.vs\mbspc\v14">
+      <UniqueIdentifier>{7ec669b8-b1fd-4dd9-ac44-8b0dd08d8a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\botlib">
+      <UniqueIdentifier>{6d728252-3a50-4e82-bd65-ae49e2f75eda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\build">
+      <UniqueIdentifier>{4d704af9-267b-47a2-b927-95a35d0be03f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\build\linux">
+      <UniqueIdentifier>{7a5f30cd-af1e-4f56-9d2a-c8392968ceca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\build\linux\obj">
+      <UniqueIdentifier>{33dff4ed-10dc-4fc0-8b0e-612d76ad1e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\build\win32">
+      <UniqueIdentifier>{1d8f2c7c-0c51-46fd-8874-8f9e377c77cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\build\win32\obj">
+      <UniqueIdentifier>{bf10c097-6620-4731-befa-16aca273b688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Debug">
+      <UniqueIdentifier>{04046e5f-66e8-4679-bc40-cd76b2336ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Debug\mbspc.tlog">
+      <UniqueIdentifier>{bc0746f4-5b49-4ef7-b1e9-1f1ea55c590b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\doc">
+      <UniqueIdentifier>{1abc2f76-13e3-4ec9-b592-8ac27e8ff913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mbspc">
+      <UniqueIdentifier>{37c26105-6556-4810-80dc-2384846af721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\obj">
+      <UniqueIdentifier>{8eb8e8c1-a841-40ec-b167-1082c18fb354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\obj\Win32">
+      <UniqueIdentifier>{7f4027ca-3947-437e-88d3-0cde849cc1cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\obj\Win32\Debug">
+      <UniqueIdentifier>{ccf85340-f904-4de4-acc1-e7b6e0326aa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\qcommon">
+      <UniqueIdentifier>{1f82f443-cc1b-423f-a6cf-042c2af22a0b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include=".\botlib\aasfile.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas_bsp.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas_cluster.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas_def.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas_funcs.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas_move.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas_optimize.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas_reach.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_aas_sample.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\be_interface.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\botlib.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\l_libvar.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\l_log.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\l_memory.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\l_precomp.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\l_script.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\botlib\l_struct.h">
+      <Filter>Header Files\botlib</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aasfile.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_areamerging.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_cfg.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_create.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_edgemelting.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_facemerging.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_file.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_gsubdiv.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_map.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_prunenodes.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\aas_store.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\be_aas_bsp.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\be_aas_bspc.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_bsp_ent.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_bsp_hl.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_bsp_q1.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_bsp_q2.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_bsp_q3.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_bsp_sin.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_cmd.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_log.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_math.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_mem.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_poly.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_qfiles.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_threads.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\l_utils.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\q2files.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\q3files.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\qbsp.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\qfiles.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\mbspc\sinfiles.h">
+      <Filter>Header Files\mbspc</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\cm_local.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\cm_patch.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\cm_polylib.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\cm_public.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\qcommon.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\qfiles.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\q_platform.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\q_shared.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\surfaceflags.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include=".\qcommon\unzip.h">
+      <Filter>Header Files\qcommon</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include=".\botlib\be_aas_bspq3.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\be_aas_cluster.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\be_aas_move.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\be_aas_optimize.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\be_aas_reach.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\be_aas_sample.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\l_libvar.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\l_precomp.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\l_script.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\botlib\l_struct.c">
+      <Filter>Source Files\botlib</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_areamerging.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_cfg.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_create.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_edgemelting.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_facemerging.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_file.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_gsubdiv.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_map.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_prunenodes.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\aas_store.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\be_aas_bspc.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\brushbsp.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\bspc.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\bspcmd.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\bsp_ent.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\bsp_hl.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\bsp_q1.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\bsp_q2.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\bsp_q3.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\bsp_sin.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\csg.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\faces.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\glfile.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\leakfile.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\log.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\map.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\map_hl.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\map_q1.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\map_q2.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\map_q3.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\map_sin.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\math.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\mem.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\nodraw.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\poly.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\portals.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\prtfile.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\qfiles.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\textures.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\threads.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\tree.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\utils.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\mbspc\writebsp.c">
+      <Filter>Source Files\mbspc</Filter>
+    </ClCompile>
+    <ClCompile Include=".\qcommon\cm_load.c">
+      <Filter>Source Files\qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include=".\qcommon\cm_patch.c">
+      <Filter>Source Files\qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include=".\qcommon\cm_test.c">
+      <Filter>Source Files\qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include=".\qcommon\cm_trace.c">
+      <Filter>Source Files\qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include=".\qcommon\md4.c">
+      <Filter>Source Files\qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include=".\qcommon\unzip.c">
+      <Filter>Source Files\qcommon</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

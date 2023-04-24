@@ -1,0 +1,15 @@
+TExtract 0.3
+(c) 2001 by darthpaul <paul@thewall.de>
+
+TExtract ist ein Tool zum Extrahieren von Texturen aus (Halflife-)BSP-Maps. Es wird folgendermaﬂen aufgerufen:
+
+textract <bspfile> <wadfile> [-l]
+
+Wobei bspfile die Map ist die Texturen enth‰lt (d.h mit -wadinclude kompiliert worden ist). wadfile ist die Wadfile, in die die Texturen reinsollen. ACHTUNG diese Datei wird ¸berschrieben wenn sie existieren sollte!
+-l KANN benutzt werden um ein Textur Listing anzuzeigen (Texturname, X, Y, und ob die Textur in die BSP File eingebettet ist oder nicht).
+
+HINWEIS: Ich ¸bernehme keine Haftung f¸r irgendwelche Sch‰den die durch dieses Tool entstehen kˆnnen. Des weiteren K÷NNEN Texturen in BSP Files gesch¸tzt sein (M¸ssen aber nicht), d.h. es hat jemand ein Copyright darauf. In diesem Fall ¸bernimmt der Benutzter des Programms die volle Verantwortung und haftet f¸r eventuell angerichtete Sch‰den.
+
+d/l latest version: www.thewall.de -> files
+
+have fun
