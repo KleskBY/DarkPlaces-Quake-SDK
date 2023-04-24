@@ -1,5 +1,0 @@
-//list all desired tdm maps here for the menu
-dm1
-dm2
-dm3
-dm4

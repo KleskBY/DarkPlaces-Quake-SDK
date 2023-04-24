@@ -1,8 +1,0 @@
-/*
-battleMETAL
-Author: Peter Roohr
-Date: 9/7/2016
-Overview: 
-  any server-side needed extensions.
-*/
-.float chainWeaponTimer;

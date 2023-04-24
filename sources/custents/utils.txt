@@ -1,0 +1,9 @@
+Filename  : utils.zip
+Date      : 3/11/98
+
+These are the level compiling utilities that I use. There are probably
+better ones than these out there, but I don't have 'em. These should allow
+you to compile just about anything quite nicely.
+
+LightDLX was made by Neal White. His email address is nwhite@softblox.com,
+so drop him a line and say, "BrooHaHa!"... or something or that nature. :)

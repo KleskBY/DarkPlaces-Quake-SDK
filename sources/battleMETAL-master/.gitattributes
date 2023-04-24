@@ -1,4 +1,0 @@
-#.gitattributes file, cleanup
-*.qc linguist-language=C
-*.qh linguist-language=C
-*.src linguist-language=C
