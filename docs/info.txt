@@ -1,7 +1,7 @@
 
 //SOME INFO
 Obj import - make sure usemtl line in .obj file links to texute file (usemtl textures/stalker/roof/roof_metal_01.tga) or (usemtl metal10)
-Inches to meters = 0.0254
+Inches to meters = 0.025
 20 20 72 //Half-life payer size '-10 -10 -36', '10 10 36'; //72 units tall
 32 32 56 //quake '-16 -16 -24' '16 16 32' //56
  
